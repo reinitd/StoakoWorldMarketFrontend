@@ -1,12 +1,22 @@
 <script>
-  export let title = '';
-  export let content = '';
+  export let title = "";
+  export let content = "";
   export let showModal = false;
 
   const closeModal = () => {
     showModal = false;
   };
 </script>
+
+{#if showModal}
+  <div class="modal" on:click={closeModal}>
+    <div class="modal-content" on:click|stopPropagation>
+      <span class="close" on:click={closeModal}>&times;</span>
+      <h2>{title}</h2>
+      <p>{@html content}</p>
+    </div>
+  </div>
+{/if}
 
 <style>
   .modal {
@@ -29,7 +39,7 @@
     width: fit-content;
     word-wrap: break-word;
     color: white;
-    font-size: .95rem !important;
+    font-size: 0.95rem !important;
     text-align: left !important;
   }
 
@@ -47,13 +57,3 @@
     cursor: pointer;
   }
 </style>
-
-{#if showModal}
-  <div class="modal" on:click={closeModal}>
-    <div class="modal-content" on:click|stopPropagation>
-      <span class="close" on:click={closeModal}>&times;</span>
-      <h2>{title}</h2>
-      <p>{@html content}</p>
-    </div>
-  </div>
-{/if}
