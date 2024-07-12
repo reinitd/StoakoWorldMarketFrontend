@@ -55,41 +55,41 @@
     </div>
     <div class="sidebar-group blue-text">
         <p on:click={openHelpModal}>help, faq, abuse, legal</p>
-        <Modal
-            title="Coming Soon."
-            content='The "help, faq, abuse, legal" page is coming soon <small>(probably never)</small>.'
-            bind:showModal={showHelpModal}
-        />
         <p on:click={openScamModal}>avoid scams and fraud</p>
-        <Modal
-            title="Scams"
-            content={scamModalContent}
-            bind:showModal={showScamModal}
-        />
 
         <p on:click={openSafetyModal}>personal safety tips</p>
-        <Modal
-            title="Safety"
-            content={safetyContent}
-            bind:showModal={showSafetyModal}
-        />
     </div>
     <div class="sidebar-group blue-text">
         <p>about WorldMarket</p>
         <p>WorldMarket is hiring</p>
+        <p>What's new</p>
     </div>
     <div class="sidebar-group blue-text">
         <p>WorldMarket is brought to you by New Stoako.</p>
     </div>
 </div>
+<Modal
+    title="Coming Soon."
+    content="The &quot;help, faq, abuse, legal&quot; page is coming soon <small>(probably never)</small>."
+    bind:showModal={showHelpModal}
+/>
+<Modal
+    title="Scams"
+    content={scamModalContent}
+    bind:showModal={showScamModal}
+/><Modal
+    title="Safety"
+    content={safetyContent}
+    bind:showModal={showSafetyModal}
+/>
 
 <style>
     #sidebar {
-        flex-grow: 1;
+        flex-shrink: 1;
         gap: 5rem;
         padding: 1rem 0.5rem;
         max-width: 20%;
-        width: auto;
+        width: min-content;
         align-items: center;
         display: flex;
         flex-direction: column;
@@ -115,7 +115,7 @@
         font-weight: bold;
         color: white;
         -webkit-text-stroke: 2px black;
-        font-size: clamp(1rem, 3.75rem, 4rem);
+        font-size: clamp(1rem, 4.5rem, 5rem);
         margin: 0;
         padding: 0;
         display: inline-block;
@@ -139,7 +139,7 @@
         & p {
             margin: 0;
             font-weight: 500;
-            font-size: .9rem;
+            font-size: 0.9rem;
         }
 
         & i {

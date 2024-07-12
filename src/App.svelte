@@ -1,6 +1,7 @@
 <script lang="ts">
   import Sidebar from "./lib/Sidebar.svelte";
   import ContentSection from "./lib/ContentSection.svelte";
+  import LocationsSidebar from "./lib/LocationsSidebar.svelte";
 
   const catagoriesContent = {
     building: `<ul>
@@ -179,9 +180,7 @@
           </span>
         </div>
       </div>
-      <div id="location" class="content border-lateral">
-        <p>Locations</p>
-      </div>
+      <LocationsSidebar />
     </div>
   </div>
 </main>
@@ -189,7 +188,7 @@
 <style>
   #container {
     width: 100%;
-    height: 70%;
+    height: auto;
     gap: var(--u-main-gap);
     margin: 0 auto;
 
@@ -209,6 +208,7 @@
   #content {
     flex-shrink: 1;
     gap: var(--u-main-gap);
+    padding-bottom: var(--u-main-gap);
 
     & header > h1 {
       flex-grow: 1;
@@ -239,12 +239,6 @@
     margin: 0 auto;
     margin-top: 25px;
     height: 100vh;
-  }
-
-  #location {
-    min-width: 90px;
-    text-align: center;
-    padding: 1rem 0.5rem; /* TODO: turn px to rem. */
   }
 
   .grid-3x3 {

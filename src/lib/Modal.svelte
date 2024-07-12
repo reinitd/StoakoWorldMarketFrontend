@@ -38,7 +38,6 @@
     border: 1px solid #888;
     width: fit-content;
     word-wrap: break-word;
-    color: white;
     font-size: 0.95rem !important;
     text-align: left !important;
   }
