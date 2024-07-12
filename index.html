@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>WorldMarket by Stoako</title>
+    <meta name="description" content="Page Description"> <!-- TODO: update meta description -->
+    <meta property="og:title" content="Home - Page"> <!-- TODO: update og:title -->
+    <meta property="og:url" content="https://www.example.com/page"> <!-- TODO: update og:url -->
+    <meta property="og:description" content="OG Page Description"> <!-- TODO: update og:description -->
+    <meta property="og:image" content="/path/to/image"> <!-- TODO: og:image -->
+    <meta property="og:image:alt" content="OG Image Description"> <!-- TODO: update og:image:alt -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="large-image-twitter.jpg"> <!-- TODO: update twitter:cared -->
+    <link rel="canonical" href="https://www.example.com/page"> <!-- TODO: update canonical link -->
+    <link rel="icon" type="image/png" href="/assets/images/stoako.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/pieces/sidebar.css">
+    <link rel="stylesheet" href="/styles/pieces/contentsection.css">
+    <link rel="stylesheet" href="/styles/pieces/modal.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <main id="wrapper">
+        <div id="container" class="flex-row">
+            <div id="sidebar" class="content flex-col border-lateral">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <a href="/">
+                        <div id="blurb">
+                            <p>WM</p>
+                        </div>
+                    </a>
+                    <br />
+                    <span id="post-container">
+                        <i class="bx bx-edit"></i>
+                        <p>post an item</p>
+                    </span>
+                    <br />
+                    <span id="search-container">
+                        <i class="bx bx-fw bx-search-alt-2"></i>
+                        <input type="text" id="search" placeholder="search worldmarket" />
+                    </span>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p onclick="showModal(modalContent.help)">
+                        help, faq, abuse, legal</p>
+                    <p onclick="showModal(modalContent.scams)">avoid scams and fraud</p>
+                    <p onclick="showModal(modalContent.safety)">personal safety tips</p>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p>about WorldMarket</p>
+                    <p>WorldMarket is hiring</p>
+                    <p>What's new</p>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p>WorldMarket is brought to you by New Stoako.</p>
+                </div>
+            </div>
+            <div id="content" class="flex-col">
+                <header class="content border-vertical flex-center-vertical">
+                    <h1><strong>WorldMarket</strong> <small>by Stoako</small></h1>
+                    <div id="actions" class="flex-row">
+                        <a href="#" style="color: #7be459;">
+                            <i class="bx bx-edit"></i>
+                        </a>
+                        <a href="/acct" style="color: rgb(200, 195, 188);">
+                            <i class="bx bx-user"></i>
+                        </a>
+                    </div>
+                </header>
+                <div class="flex-col" style="gap: var(--u-main-gap);">
+                    <span>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong><a href='#'
+                                        style='display: inline-block; width: 100%;'>Building</a></strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">All-type Planks</a></li>
+                                    <li><a href="#">Stone</a></li>
+                                    <li><a href="#">Stone Brick</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Quartz</a></li>
+                                    <li><a href="#">Glass</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Colored</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Wool</a></li>
+                                    <li><a href="#">Stained Glass</a></li>
+                                    <li><a href="#">Concrete</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Concrete Powder</a></li>
+                                    <li><a href="#">Terracotta</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Natural</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Dirt</a></li>
+                                    <li><a href="#">Sand</a></li>
+                                    <li><a href="#">Ice</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">All-type Ore</a></li>
+                                    <li><a href="#">All-type Logs</a></li>
+                                    <li><a href="#">All-type Leaves</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </span>
+                    <span>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Functional</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Anvil</a></li>
+                                    <li><a href="#">Painting</a></li>
+                                    <li><a href="#">End Crystals</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Shulker Box</a></li>
+                                    <li><a href="#">All-type Heads</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Redstone</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Redstone Dust</a></li>
+                                    <li><a href="#">Redstone Blocks</a></li>
+                                    <li><a href="#">Repeaters</a></li>
+                                    <li><a href="#">Comparator</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Slime Block</a></li>
+                                    <li><a href="#">Honey Block</a></li>
+                                    <li><a href="#">Redstone Lamp</a></li>
+                                    <li><a href="#">TNT</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Piston</a></li>
+                                    <li><a href="#">Sticky Piston</a></li>
+                                    <li><a href="#">Observer</a></li>
+                                    <li><a href="#">All-Type Rails</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </span>
+                    <span>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Ingredients</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Nether Warts</a></li>
+                                    <li><a href="#">Blaze Rods</a></li>
+                                    <li><a href="#">Raw Gold</a></li>
+                                    <li><a href="#">Bottle o' Enchanting</a></li>
+                                    <li><a href="#">Bones</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Pottery Sherd</a></li>
+                                    <li><a href="#">Smithing Template</a></li>
+                                    <li><a href="#">Enchanted Books</a></li>
+                                    <li><a href="#">Nether Star</a></li>
+                                    <li><a href="#">Eye of Ender</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Combat</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Totem of Undying</a></li>
+                                    <li><a href="#">Shields</a></li>
+                                    <li><a href="#">Netherite Swords</a></li>
+                                    <li><a href="#">Diamond Swords</a></li>
+                                    <li><a href="#">Netherite Armour Set</a></li>
+                                    <li><a href="#">Diamond Armour Set</a></li>
+
+                                </ul>
+                                <ul>
+                                    <li><a href="#">All-Type Helmets</a></li>
+                                    <li><a href="#">All-Type Chestplates</a></li>
+                                    <li><a href="#">All-Type Leggings</a></li>
+                                    <li><a href="#">All-Type Boots</a></li>
+                                    <li><a href="#">Horse Armour</a></li>
+                                    <li><a href="#">Tridents</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </span>
+                    <span>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Food &amp; Drinks</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">Golden Apples</a></li>
+                                    <li><a href="#">Enchanted Gapples</a></li>
+                                    <li><a href="#">Chorus Fruit</a></li>
+                                    <li><a href="#">Drinks</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Cocaine</a></li>
+                                    <li><a href="#">Potions</a></li>
+                                    <li><a href="#">Splash Potions</a></li>
+                                    <li><a href="#">Lingering Potions</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="content-section">
+                            <p class="content border-vertical"><strong>
+                                    <a href='#' style='display: inline-block; width: 100%;'>Tools &amp; Utility</a>
+                                </strong></p>
+                            <div class="links">
+                                <ul>
+                                    <li><a href="#">All-Type Shovels</a></li>
+                                    <li><a href="#">All-Type Pickaxes</a></li>
+                                    <li><a href="#">All-Type Axes</a></li>
+                                    <li><a href="#">All-Type Hoes</a></li>
+                                </ul>
+                                <ul>
+                                    <li><a href="#">Saddle</a></li>
+                                    <li><a href="#">Ender Pearl</a></li>
+                                    <li><a href="#">All-Type Music Discs</a></li>
+                                    <li><a href="#">Elytra</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </span>
+                </div>
+            </div>
+            <div id="location" class="content border-lateral">
+                <p>Locations</p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        #location {
+            min-width: 90px;
+            text-align: center;
+            padding: 1rem 0.5rem;
+        }
+    </style>
+
+    <script>
+        const modalContent = {
+            help: { title: 'Coming Soon', content: 'The &quot;help, faq, abuse, legal&quot; page is coming soon <small>&lpar;probably never&rpar;</small>.' },
+            scams: {
+                title: 'Scams', content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    Sometimes you may encounter someone pretending to be a WorldMarket user or other trusted authority<br/>in order to get your money, items, or personal information.<br/>
+    <br/>
+    We have gathered some indicators that may help you stay safe and identify fake offers on WorldMarket:` },
+            safety: {
+                title: 'Safety',
+                content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    As with all transactions, please practice caution when interacting with others.<br/>
+    <br/>
+    When meeting someone for the first time, please remember to:<br/>
+    <ul>
+        <li>Insist on a public meeting place like a bank or police department.</li>
+        <li>Do not meet in a secluded place or invite strangers into your home.</li>
+        <li>Be especially careful buying/selling high value items.</li>
+        <li>Tell a friend or family member where you're going.</li>
+        <li>Consider having a friend accompany you.</li>
+        <li>Trust your instincts.</li>
+    </ul>
+    Taking these simple precautions helps make WorldMarket safer for everyone.`
+            }
+        };
+    </script>
+
+    <script src="/js/modal.js"></script>
+    <script src="js/pages/index.js"></script>
+    <script src="js/cookies.js"></script>
+    <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="/assets/js/script.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #191a1b;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    --u-main-gap: 20px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+i,
+p {
+    margin: 0;
+}
+
+.blue-text {
+    color: rgb(61, 132, 255);
+}.blue-text * {
+    cursor: pointer;
+}
+
+.blue-text *:hover {
+    color: #dd65f3;
+    text-decoration: underline;
+}
+
+a {
+    text-decoration: none;
+    color: rgb(61, 132, 255);
+}
+
+a:hover {
+    color: #dd65f3;
+    text-decoration: underline;
+}
+
+.content {
+    background-color: #1f2122;
+    padding: 0 10px;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-center-vertical {
+    display: flex;
+    align-items: center;
+}
+
+.border-vertical {
+    border-top: 1px solid #404446;
+    border-bottom: 1px solid #404446;
+}
+
+.border-lateral {
+    border-left: 1px solid #404446;
+    border-right: 1px solid #404446;
+}
+
+#container {
+    width: 100%;
+    height: auto;
+    gap: var(--u-main-gap);
+    margin: 0 auto;
+}
+
+#container header {
+    flex-shrink: 1;
+    gap: 20rem;
+    padding: 0.5rem 1rem;
+}
+
+#container header h1 {
+    font-family: "Times New Roman", Times, serif;
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    font-size: 1.25rem;
+}
+
+#content {
+    flex-shrink: 1;
+    gap: var(--u-main-gap);
+}
+
+#content>div span {
+    gap: var(--u-main-gap);
+    display: inline-flex;
+}
+
+#content header>h1 {
+    flex-grow: 1;
+}
+
+#actions {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#actions a i {
+    font-size: 1.5rem;
+}
+
+#wrapper {
+    min-width: 50%;
+    width: fit-content;
+    margin: 0 auto;
+    margin-top: 25px;
+    height: 100vh;
+}

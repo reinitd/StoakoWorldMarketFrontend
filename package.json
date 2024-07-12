@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "serve -l 80",
+    "compile": "tsc --watch"
+  },
+  "devDependencies": {
+    "serve": "^14.2.3",
+    "typescript": "^5.5.3"
+  }
+}
