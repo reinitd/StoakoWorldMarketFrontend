@@ -21,3 +21,11 @@ function formatUnixTime(unixTime: number): string {
 
     return `${month} ${day}, ${year} at ${hours}:${minutesStr}${ampm}`;
 }
+
+function isEmpty(value:string):boolean {
+    return value === null || value === undefined || value.trim() === '';
+}
+
+function delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+}

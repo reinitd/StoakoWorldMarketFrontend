@@ -15,3 +15,9 @@ function formatUnixTime(unixTime) {
     const minutesStr = minutes < 10 ? '0' + minutes : minutes.toString();
     return `${month} ${day}, ${year} at ${hours}:${minutesStr}${ampm}`;
 }
+function isEmpty(value) {
+    return value === null || value === undefined || value.trim() === '';
+}
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         loadingScreen.appendChild(warning);
         return;
     }
-    
+
     const user = userResult.value;
 
     document.querySelectorAll('.js-joindate-here').forEach(element => {
@@ -38,10 +38,42 @@ document.addEventListener("DOMContentLoaded", async function () {
         element.textContent = user.nationAffiliation;
     });
 
+    document.querySelectorAll('.js-items-sold-here').forEach(element => {
+        element.textContent = user.itemsSold.toString();
+    });
+
     document.querySelectorAll('.js-location-here').forEach(element => {
         element.textContent = user.location;
     });
 
+
+    if (this.location.pathname.toLowerCase() == '/acct/edit') {
+        const nationAffiliationInput = document.getElementById('js-nation-affiliation-input') as HTMLInputElement;
+        const locationInput = document.getElementById('js-location-input') as HTMLInputElement;
+        const submit = document.getElementById('js-submit-edits');
+
+        nationAffiliationInput.setAttribute('value', user.nationAffiliation);
+        nationAffiliationInput.setAttribute('placeholder', user.nationAffiliation);
+        locationInput.setAttribute('value', user.location);
+        locationInput.setAttribute('placeholder', user.location);
+
+        submit.addEventListener('click', async () => {
+
+            if (isEmpty(nationAffiliationInput.value)) {
+                nationAffiliationInput.value = user.nationAffiliation;
+            }
+
+            if (isEmpty(locationInput.value)) {
+                locationInput.value = user.location;
+            }
+
+            user.nationAffiliation = nationAffiliationInput.value.trim();
+            user.location = locationInput.value.trim();
+
+            const updateRes = await updateUser(user, apiKey);
+            showModal({ title: updateRes.success ? "Success" : "Uh oh.", content: updateRes.message });
+        });
+    }
 
     loadingScreen.remove();
     //@ts-ignore

@@ -30,6 +30,19 @@
 </head>
 
 <body>
+    <noscript>
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            background-color: red;
+            height: auto;
+            ">
+            <p>You <strong>need</strong> JavaScript to run this application.</p>
+        </div>
+    </noscript>
     <main id="wrapper">
         <div id="container" class="flex-row">
             <div id="sidebar" class="content flex-col border-lateral">
@@ -40,15 +53,16 @@
                         </div>
                     </a>
                     <br />
-                    <span id="post-container">
+                    <a class="sidebar-button-container">
                         <i class="bx bx-edit"></i>
                         <p>post an item</p>
-                    </span>
+                    </a>
                     <br />
                     <span id="search-container">
                         <i class="bx bx-fw bx-search-alt-2"></i>
                         <input type="text" id="search" placeholder="search worldmarket" />
                     </span>
+                    <a href="#" style="margin-top: 1rem;">view new listings</a>
                 </div>
                 <div class="sidebar-group blue-text">
                     <p onclick="showModal(modalContent.help)">
@@ -82,39 +96,51 @@
                     <div id="loading">
                         <span id="spinner">
                             <i class='bx bx-refresh'
-                            style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
+                                style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
                     </div>
-                    <div class="flex-row">
-                        <div id="settings">
-                            <h1>Hello, <span class="js-username-here"></span>!</h1>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <th>Username</th>
-                                        <td class="js-username-here"><i id="tippy-reload"
-                                                class='bx bx-fw bx-refresh'></i></td>
-                                    </tr>
-                                    <tr>
-                                        <th>UUID</th>
-                                        <td class="js-uuid-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Nation Affiliation</th>
-                                        <td class="js-nation-affiliation-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Location</th>
-                                        <td class="js-location-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Joined WM</th>
-                                        <td class="js-joindate-here"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="flex-col" style="gap: .5rem; height: 100%;">
+                        <span class="flex-row"
+                            style="justify-content: space-around; margin-top: .25rem; padding-bottom: .5rem; border-bottom: 1px solid #404446;">
+                            <a href="/acct/edit">Edit Account</a>
+                            <a href="#">View Listings</a>
+                            <a href="#" style="color: rgb(255, 61, 0);">Log out</a>
+                        </span>
+                        <div id="settings" class="flex-row">
+                            <div>
+                                <h1>Hello, <span class="js-username-here"></span>!</h1>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td class="js-username-here"><i id="tippy-reload"
+                                                    class='bx bx-fw bx-refresh'></i></td>
+                                        </tr>
+                                        <tr>
+                                            <th>UUID</th>
+                                            <td class="js-uuid-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nation Affiliation</th>
+                                            <td class="js-nation-affiliation-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <td class="js-location-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Items Sold</th>
+                                            <td class="js-items-sold-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Joined WM</th>
+                                            <td class="js-joindate-here"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img id="js-head-img" alt="MC Head" />
                         </div>
-                        <img id="js-head-img" alt="MC Head" />
                     </div>
                 </div>
             </div>

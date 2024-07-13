@@ -41,3 +41,33 @@ function fetchUser(uuid) {
         return result;
     });
 }
+function updateUser(userToUpdate, worldMarketApiKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = new Result(false, "An unhandled error occured.");
+        const url = `https://localhost/api/v1/user/update`;
+        try {
+            const response = yield fetch(url, {
+                method: "PUT",
+                body: JSON.stringify({ User: userToUpdate }),
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${worldMarketApiKey}`
+                }
+            });
+            if (!response.ok) {
+                result.message = response.status.toString();
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = yield response.json();
+            const res = deserialize(data, Result);
+            result.success = res.success;
+            result.message = res.message;
+        }
+        catch (error) {
+            result.message = error;
+            console.error('Error updating user:', error);
+        }
+        return result;
+    });
+}

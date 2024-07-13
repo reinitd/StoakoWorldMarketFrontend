@@ -28,27 +28,59 @@ class User {
 
 
 async function fetchUser(uuid: string): Promise<Result<User>> {
-    const result = new Result<User>(false, "An unhandled error occured.", null);
+  const result = new Result<User>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/user/fetch/${uuid}`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            result.message = response.status.toString();
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const data = await response.json();
-        const user:User = deserialize<User>(data.value, User);
-
-
-        result.success = true;
-        result.message = "OK.";
-        result.value = user;
-
-    } catch (error) {
-        result.message = error;
-        console.error('Error fetching data:', error);
+  const url = `https://localhost/api/v1/user/fetch/${uuid}`;
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      result.message = response.status.toString();
+      throw new Error(`HTTP error! Status: ${response.status}`);
     }
+    const data = await response.json();
+    const user: User = deserialize<User>(data.value, User);
 
-    return result;
+
+    result.success = true;
+    result.message = "OK.";
+    result.value = user;
+
+  } catch (error) {
+    result.message = error;
+    console.error('Error fetching data:', error);
+  }
+
+  return result;
+}
+
+async function updateUser(userToUpdate: User, worldMarketApiKey: string): Promise<Result> {
+  const result = new Result(false, "An unhandled error occured.");
+
+  const url = `https://localhost/api/v1/user/update`;
+  try {
+    const response = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify({ User: userToUpdate }),
+      headers: {
+        "Accept": "*/*", 
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${worldMarketApiKey}`
+      }
+    });
+    if (!response.ok) {
+      result.message = response.status.toString();
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const data = await response.json();
+    const res = deserialize<Result>(data, Result);
+
+    result.success = res.success;
+    result.message = res.message;
+
+  } catch (error) {
+    result.message = error;
+    console.error('Error updating user:', error);
+  }
+
+  return result;
 }

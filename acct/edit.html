@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>WorldMarket by Stoako</title>
+    <meta name="description" content="Page Description"> <!-- TODO: update meta description -->
+    <meta property="og:title" content="Home - Page"> <!-- TODO: update og:title -->
+    <meta property="og:url" content="https://www.example.com/page"> <!-- TODO: update og:url -->
+    <meta property="og:description" content="OG Page Description"> <!-- TODO: update og:description -->
+    <meta property="og:image" content="/path/to/image"> <!-- TODO: og:image -->
+    <meta property="og:image:alt" content="OG Image Description"> <!-- TODO: update og:image:alt -->
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="large-image-twitter.jpg"> <!-- TODO: update twitter:cared -->
+    <link rel="canonical" href="https://www.example.com/page"> <!-- TODO: update canonical link -->
+    <link rel="icon" type="image/png" href="/assets/images/stoako.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/acct.css">
+    <link rel="stylesheet" href="/styles/anims.css">
+    <link rel="stylesheet" href="/styles/pieces/sidebar.css">
+    <link rel="stylesheet" href="/styles/pieces/contentsection.css">
+    <link rel="stylesheet" href="/styles/pieces/modal.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css" />
+    <script src="/js/preCode.js"></script>
+</head>
+
+<body>
+    <noscript>
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            background-color: red;
+            height: auto;
+            ">
+            <p>You <strong>need</strong> JavaScript to run this application.</p>
+        </div>
+    </noscript>
+    <main id="wrapper">
+        <div id="container" class="flex-row">
+            <div id="sidebar" class="content flex-col border-lateral">
+                <div style="display: flex; flex-direction: column; align-items: center;">
+                    <a href="/">
+                        <div id="blurb">
+                            <p>WM</p>
+                        </div>
+                    </a>
+                    <br />
+                    <a class="sidebar-button-container">
+                        <i class="bx bx-edit"></i>
+                        <p>post an item</p>
+                    </a>
+                    <br />
+                    <span id="search-container">
+                        <i class="bx bx-fw bx-search-alt-2"></i>
+                        <input type="text" id="search" placeholder="search worldmarket" />
+                    </span>
+                    <a href="#" style="margin-top: 1rem;">view new listings</a>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p onclick="showModal(modalContent.help)">
+                        help, faq, abuse, legal</p>
+                    <p onclick="showModal(modalContent.scams)">avoid scams and fraud</p>
+                    <p onclick="showModal(modalContent.safety)">personal safety tips</p>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p>about WorldMarket</p>
+                    <p>WorldMarket is hiring</p>
+                    <p>What's new</p>
+                </div>
+                <div class="sidebar-group blue-text">
+                    <p>WorldMarket is brought to you by New Stoako.</p>
+                </div>
+            </div>
+            <div id="content" class="flex-col">
+                <header class="content border-vertical flex-center-vertical">
+                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; acct &rsaquo; edit</span>
+                    </h1>
+                    <div id="actions" class="flex-row">
+                        <a href="#" style="color: #7be459;">
+                            <i class="bx bx-edit"></i>
+                        </a>
+                        <a href="/acct" style="color: rgb(200, 195, 188);">
+                            <i class="bx bx-user"></i>
+                        </a>
+                    </div>
+                </header>
+                <div id="settings-wrapper" class="content border-vertical">
+                    <div id="loading">
+                        <span id="spinner">
+                            <i class='bx bx-refresh'
+                                style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
+                        </span>
+                    </div>
+                    <div class="flex-col" style="gap: .5rem; height: 100%;">
+                        <span class="flex-row"
+                            style="justify-content: space-around; margin-top: .25rem; padding-bottom: .5rem; border-bottom: 1px solid #404446;">
+                            <a href="/acct">View Account</a>
+                            <a href="#">View Listings</a>
+                            <a href="#" style="color: rgb(255, 61, 0);">Log out</a>
+                        </span>
+                        <div id="settings" class="flex-row">
+                            <div>
+                                <h1>Hello, <span class="js-username-here"></span>!</h1>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <th>Username</th>
+                                            <td class="js-username-here"><i id="tippy-reload"
+                                                    class='bx bx-fw bx-refresh'></i></td>
+                                        </tr>
+                                        <tr>
+                                            <th>UUID</th>
+                                            <td class="js-uuid-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Nation Affiliation</th>
+                                            <td>
+                                                <input type="text" name="nationAffiliation" id="js-nation-affiliation-input" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <td>
+                                                <input type="text" name="location" id="js-location-input" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Items Sold</th>
+                                            <td class="js-items-sold-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Joined WM</th>
+                                            <td class="js-joindate-here"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img id="js-head-img" alt="MC Head" />
+                        </div>
+                        <span style="flex-shrink: 1; margin-top: 1rem;">
+                            <a id="js-submit-edits" style="
+                                color: #7be459; cursor: pointer; text-align: center; margin: 0 auto;
+                                ">Submit Changes</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div id="location" class="content border-lateral">
+                <p>Locations</p>
+            </div>
+        </div>
+    </main>
+
+    <style>
+        #location {
+            min-width: 90px;
+            text-align: center;
+            padding: 1rem 0.5rem;
+        }
+    </style>
+
+    <script>
+        const modalContent = {
+            help: { title: 'Coming Soon', content: 'The &quot;help, faq, abuse, legal&quot; page is coming soon <small>&lpar;probably never&rpar;</small>.' },
+            scams: {
+                title: 'Scams', content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    Sometimes you may encounter someone pretending to be a WorldMarket user or other trusted authority<br/>in order to get your money, items, or personal information.<br/>
+    <br/>
+    We have gathered some indicators that may help you stay safe and identify fake offers on WorldMarket:` },
+            safety: {
+                title: 'Safety',
+                content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    As with all transactions, please practice caution when interacting with others.<br/>
+    <br/>
+    When meeting someone for the first time, please remember to:<br/>
+    <ul>
+        <li>Insist on a public meeting place like a bank or police department.</li>
+        <li>Do not meet in a secluded place or invite strangers into your home.</li>
+        <li>Be especially careful buying/selling high value items.</li>
+        <li>Tell a friend or family member where you're going.</li>
+        <li>Consider having a friend accompany you.</li>
+        <li>Trust your instincts.</li>
+    </ul>
+    Taking these simple precautions helps make WorldMarket safer for everyone.`
+            }
+        };
+    </script>
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
+
+    <script src="/js/modal.js"></script>
+    <script src="/js/result.js"></script>
+    <script src="/js/helpers.js"></script>
+    <script src="/js/pages/acct.js"></script>
+    <!-- <script src="/js/pages/acctedit.js"></script> -->
+    <script src="/js/cookies.js"></script>
+    <script src="/js/database/user.js"></script>
+    <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</body>
+
+</html>

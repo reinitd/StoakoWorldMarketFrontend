@@ -40,9 +40,33 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll('.js-nation-affiliation-here').forEach(element => {
             element.textContent = user.nationAffiliation;
         });
+        document.querySelectorAll('.js-items-sold-here').forEach(element => {
+            element.textContent = user.itemsSold.toString();
+        });
         document.querySelectorAll('.js-location-here').forEach(element => {
             element.textContent = user.location;
         });
+        if (this.location.pathname.toLowerCase() == '/acct/edit') {
+            const nationAffiliationInput = document.getElementById('js-nation-affiliation-input');
+            const locationInput = document.getElementById('js-location-input');
+            const submit = document.getElementById('js-submit-edits');
+            nationAffiliationInput.setAttribute('value', user.nationAffiliation);
+            nationAffiliationInput.setAttribute('placeholder', user.nationAffiliation);
+            locationInput.setAttribute('value', user.location);
+            locationInput.setAttribute('placeholder', user.location);
+            submit.addEventListener('click', () => __awaiter(this, void 0, void 0, function* () {
+                if (isEmpty(nationAffiliationInput.value)) {
+                    nationAffiliationInput.value = user.nationAffiliation;
+                }
+                if (isEmpty(locationInput.value)) {
+                    locationInput.value = user.location;
+                }
+                user.nationAffiliation = nationAffiliationInput.value.trim();
+                user.location = locationInput.value.trim();
+                const updateRes = yield updateUser(user, apiKey);
+                showModal({ title: updateRes.success ? "Success" : "Uh oh.", content: updateRes.message });
+            }));
+        }
         loadingScreen.remove();
         //@ts-ignore
         tippy('#tippy-reload', { content: "Refresh username", placement: 'right', delay: [500, 0] });

@@ -27,6 +27,19 @@
 </head>
 
 <body>
+    <noscript>
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            background-color: red;
+            height: auto;
+            ">
+            <p>You <strong>need</strong> JavaScript to run this application.</p>
+        </div>
+    </noscript>
     <main id="wrapper">
         <div id="container" class="flex-row">
             <div id="sidebar" class="content flex-col border-lateral">
@@ -37,15 +50,16 @@
                         </div>
                     </a>
                     <br />
-                    <span id="post-container">
+                    <a class="sidebar-button-container">
                         <i class="bx bx-edit"></i>
                         <p>post an item</p>
-                    </span>
+                    </a>
                     <br />
                     <span id="search-container">
                         <i class="bx bx-fw bx-search-alt-2"></i>
                         <input type="text" id="search" placeholder="search worldmarket" />
                     </span>
+                    <a href="#" style="margin-top: 1rem;">view new listings</a>
                 </div>
                 <div class="sidebar-group blue-text">
                     <p onclick="showModal(modalContent.help)">

@@ -1,6 +1,6 @@
 #sidebar {
     flex-shrink: 1;
-    gap: 5rem;
+    gap: 4rem;
     padding: 1rem 0.5rem;
     max-width: 20%;
     width: min-content;
@@ -36,7 +36,7 @@
     white-space: nowrap;
 }
 
-#post-container {
+.sidebar-button-container {
     cursor: pointer;
     background-color: #151515;
     display: flex;
@@ -49,14 +49,14 @@
     gap: 2.5px;
     height: min-content;
     color: #7be459;
-}#post-container p {
+    margin-bottom: .5rem;
+}.sidebar-button-container:last-of-type {
+    margin-bottom: 0;
+}.sidebar-button-container p {
     margin: 0;
     font-weight: 500;
     font-size: 0.9rem;
-}
-#post-container:hover p {
-    text-decoration: underline;
-}#post-container i {
+}.sidebar-button-container i {
     line-height: 100%;
     font-size: 1.25rem;
 }
