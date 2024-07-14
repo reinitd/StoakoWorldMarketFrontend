@@ -1,0 +1,32 @@
+#ce-wrapper {
+    position: relative;
+    height: 100%;
+    padding: .5rem 1rem;
+    padding-top: 1.5rem;
+}
+
+#ce-wrapper h1 {
+    margin: 0;
+    font-size: 1.75rem;
+}
+
+
+#cat {
+    font-size: 1.5rem;
+    position: relative;
+    display: block;
+    line-height: 50%;
+}
+
+#order-wrapper {
+    flex-grow: 1;
+    font-size: 1.05rem;
+    text-align: right;
+    align-self: center;
+    margin-right: 1.25rem;
+}
+
+#order {
+    color: #7be459;
+    cursor: pointer;
+}

@@ -22,10 +22,42 @@ function formatUnixTime(unixTime: number): string {
     return `${month} ${day}, ${year} at ${hours}:${minutesStr}${ampm}`;
 }
 
-function isEmpty(value:string):boolean {
+function formatUnixTimeMMDDYYYY(unixTime: number): string {
+    const date = new Date(unixTime * 1000);
+    const mm = String(date.getMonth() + 1).padStart(2, '0');
+    const dd = String(date.getDate()).padStart(2, '0');
+    const yyyy = date.getFullYear();
+    return `${mm}/${dd}/${yyyy}`;
+}
+
+
+function isEmpty(value: string): boolean {
     return value === null || value === undefined || value.trim() === '';
 }
 
 function delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function getParamFromUrl<T>(paramName: string, paramType: { new(value: string): T }): T | null {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const actualParamName = Array.from(urlParams.keys()).find(key => key.toLowerCase() === paramName.toLowerCase());
+
+    if (!actualParamName) {
+        return null;
+    }
+
+    const paramValue = decodeURIComponent(urlParams.get(actualParamName));
+
+    if (!paramValue) {
+        return null;
+    }
+
+    try {
+        const parsedValue = new paramType(paramValue);
+        return parsedValue;
+    } catch {
+        return null;
+    }
 }

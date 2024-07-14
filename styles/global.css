@@ -12,6 +12,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
+
+    --c-content-bg: #1f2122;
+    --c-border: #404446;
     --u-main-gap: 20px;
 }
 
@@ -37,6 +40,12 @@ p {
     text-decoration: underline;
 }
 
+.blue-text.self { cursor: pointer; }
+.blue-text.self:hover {
+    color: #dd65f3;
+    text-decoration: underline;
+}
+
 a {
     text-decoration: none;
     color: rgb(61, 132, 255);
@@ -48,7 +57,7 @@ a:hover {
 }
 
 .content {
-    background-color: #1f2122;
+    background-color: var(--c-content-bg);
     padding: 0 10px;
 }
 
@@ -74,13 +83,13 @@ a:hover {
 }
 
 .border-vertical {
-    border-top: 1px solid #404446;
-    border-bottom: 1px solid #404446;
+    border-top: 1px solid var(--c-border);
+    border-bottom: 1px solid var(--c-border);
 }
 
 .border-lateral {
-    border-left: 1px solid #404446;
-    border-right: 1px solid #404446;
+    border-left: 1px solid var(--c-border);
+    border-right: 1px solid var(--c-border);
 }
 
 #container {
@@ -140,4 +149,22 @@ a:hover {
     margin: 0 auto;
     margin-top: 25px;
     height: 100vh;
+}
+
+#loading {
+    position: absolute;
+    background-color: var(--c-content-bg);
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+#loading #spinner {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -70%);
+}
+#dimpath {
+    opacity: .73;
 }
