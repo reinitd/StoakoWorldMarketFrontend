@@ -11,6 +11,11 @@ function getCookieValue(cookieName: string) {
     return null;
 }
 
+function setCookie(cookieName: string, cookieValue: string, cookieExp: Date) {
+    // document.cookie = `WORLDMARKETAPIKEY=${json.value.worldMarketApiKey}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`; PRODUCTION
+    document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; samesite=strict`; // DEVELOPMENT
+}
+
 function deleteCookie(name: string) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';
 }

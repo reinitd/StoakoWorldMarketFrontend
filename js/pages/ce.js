@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return __awaiter(this, void 0, void 0, function* () {
         const uuid = getParamFromUrl("uuid", String);
         if (uuid == null) {
-            this.location.href = '/search';
+            window.location.replace('/search');
         }
         const loadingScreen = document.getElementById('loading');
         const spinner = document.getElementById('spinner');

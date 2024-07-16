@@ -19,7 +19,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/acct.css">
+    <link rel="stylesheet" href="/styles/logout.css">
     <link rel="stylesheet" href="/styles/anims.css">
     <link rel="stylesheet" href="/styles/pieces/sidebar.css">
     <link rel="stylesheet" href="/styles/pieces/contentsection.css">
@@ -92,55 +92,13 @@
                         </a>
                     </div>
                 </header>
-                <div id="settings-wrapper" class="content border-vertical">
+                <div id="logout-wrapper" class="content border-vertical">
                     <div id="loading">
-                        <span id="spinner">
+                        <p id="status">Logging out...</p>
+                        <span id="spinner" class="flex-col">
                             <i class='bx bx-refresh'
                                 style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
-                    </div>
-                    <div class="flex-col" style="gap: .5rem; height: 100%;">
-                        <span class="flex-row"
-                            style="justify-content: space-around; margin-top: .25rem; padding-bottom: .5rem; border-bottom: 1px solid var(--c-border);">
-                            <a href="/acct/edit">Edit Account</a>
-                            <a href="#">View Listings</a>
-                            <a href="/logout" style="color: rgb(255, 61, 0);">Log out</a>
-                        </span>
-                        <div id="settings" class="flex-row">
-                            <div>
-                                <h1>Hello, <span class="js-username-here"></span>!</h1>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <th>Username</th>
-                                            <td class="js-username-here"><i id="tippy-reload"
-                                                    class='bx bx-fw bx-refresh'></i></td>
-                                        </tr>
-                                        <tr>
-                                            <th>UUID</th>
-                                            <td class="js-uuid-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Affiliation</th>
-                                            <td class="js-nation-affiliation-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Location</th>
-                                            <td class="js-location-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Items Sold</th>
-                                            <td class="js-items-sold-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Joined WM</th>
-                                            <td class="js-joindate-here"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <img id="js-head-img" alt="MC Head" />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -195,10 +153,9 @@
     <script src="/js/modal.js"></script>
     <script src="/js/result.js"></script>
     <script src="/js/helpers.js"></script>
-    <script src="/js/pages/acct.js"></script>
+    <script src="/js/pages/logout.js"></script>
     <script src="/js/cookies.js"></script>
-    <script src="/js/database/user.js"></script>
-    <script src="/js/database/catalogEntry.js"></script>
+    <script src="/js/database/auth.js"></script>
     <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

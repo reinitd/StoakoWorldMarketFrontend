@@ -11,8 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return __awaiter(this, void 0, void 0, function* () {
         const apiKey = getCookieValue("WORLDMARKETAPIKEY");
         if (apiKey == null) {
-            window.location.replace('/');
-            alert("Sign-up coming soon.");
+            window.location.replace('https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=http%3A%2F%2Flocalhost%2Flogin&scope=profile&response_type=code');
         }
         const loadingScreen = document.getElementById('loading');
         const spinner = document.getElementById('spinner');

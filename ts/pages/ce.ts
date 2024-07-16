@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     const uuid = getParamFromUrl("uuid", String) as string;
     if (uuid == null) {
-        this.location.href = '/search';
+        window.location.replace('/search');
     }
 
     const loadingScreen = document.getElementById('loading');
