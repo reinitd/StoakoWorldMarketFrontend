@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
     const searchResults = document.getElementById('search-results');
     const pageBack = document.getElementById('js-page-back');
     const pageForward = document.getElementById('js-page-forward');
+    const loadingScreen = document.getElementById('loading');
+    const spinner = document.getElementById('spinner');
     const filter = {
         location: document.getElementById('js-filter-location'),
         payementType: document.getElementById('js-filter-payment-type'),
@@ -194,4 +196,5 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
             location.href = `/ce?uuid=${ce.getAttribute('data-uuid')}`;
         });
     });
+    loadingScreen.remove();
 }));

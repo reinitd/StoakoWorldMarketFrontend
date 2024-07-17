@@ -1,0 +1,37 @@
+input.resize-input, textarea, select {
+    background-color: var(--c-content-bg);
+    border: 1px solid var(--c-border);
+    outline: 0;
+}
+
+input[name=ce-category] {
+    font-size: 1.15rem;
+}
+
+input[name=ce-title] {
+    font-size: 1.35rem;
+    margin: 0;
+}
+input[name=ce-quantity] {
+    font-size: 1rem;
+    width: 5ch;
+}
+input[name=ce-price] {
+    width: 7ch;
+}
+input[name=ce-currency] {
+    width: 20ch;
+}
+input[name=ce-location] {
+    width: 50%;
+}
+textarea[name=ce-description] {
+    width: 100%;
+    resize: vertical;
+}
+
+#submit {
+    display : table-row;
+    vertical-align : bottom;
+    height : 1px;
+}

@@ -5,7 +5,7 @@
 
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #191a1b;
+    background-color: var(--c-main-bg);
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -13,6 +13,7 @@
     -moz-osx-font-smoothing: grayscale;
 
 
+    --c-main-bg: #191a1b;
     --c-content-bg: #1f2122;
     --c-border: #404446;
     --u-main-gap: 20px;
@@ -54,6 +55,11 @@ a {
 a:hover {
     color: #dd65f3;
     text-decoration: underline;
+}
+
+.submit {
+    color: #7be459;
+    cursor: pointer;
 }
 
 .content {
@@ -158,7 +164,9 @@ a:hover {
     left: 0;
     height: 100%;
     width: 100%;
+    z-index: 99;
 }
+#loading.loading-main-bg { background-color: var(--c-main-bg); }
 #loading #spinner {
     position: relative;
     top: 50%;

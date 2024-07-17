@@ -53,7 +53,7 @@
                         </div>
                     </a>
                     <br />
-                    <a class="sidebar-button-container">
+                    <a href="/post" class="sidebar-button-container">
                         <i class="bx bx-edit"></i>
                         <p>post an item</p>
                     </a>
@@ -84,7 +84,7 @@
                     <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; acct &rsaquo; edit</span>
                     </h1>
                     <div id="actions" class="flex-row">
-                        <a href="#" style="color: #7be459;">
+                        <a href="/post" style="color: #7be459;">
                             <i class="bx bx-edit"></i>
                         </a>
                         <a href="/acct" style="color: rgb(200, 195, 188);">
@@ -109,13 +109,8 @@
                         <div id="settings" class="flex-row">
                             <div>
                                 <h1>Hello, <span class="js-username-here"></span>!</h1>
-                                <table>
+                                <table id="user-info-table">
                                     <tbody>
-                                        <tr>
-                                            <th>Username</th>
-                                            <td class="js-username-here"><i id="tippy-reload"
-                                                    class='bx bx-fw bx-refresh'></i></td>
-                                        </tr>
                                         <tr>
                                             <th>UUID</th>
                                             <td class="js-uuid-here"></td>
@@ -205,6 +200,7 @@
     <script src="/js/result.js"></script>
     <script src="/js/helpers.js"></script>
     <script src="/js/pages/acct.js"></script>
+    <script src="/js/populate/userInfo.js"></script>
     <script src="/js/cookies.js"></script>
     <script src="/js/database/user.js"></script>
     <script src="/js/database/catalogEntry.js"></script>

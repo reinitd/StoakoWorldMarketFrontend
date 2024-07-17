@@ -3,7 +3,6 @@ class User {
   minecraftUsername: string;
   nationAffiliation: string;
   location: string;
-  reviewsJson: string;
   itemsSold: number;
   creation: number;
 
@@ -12,7 +11,6 @@ class User {
     minecraftUsername: string,
     nationAffiliation: string,
     location: string,
-    reviewsJson: string,
     itemsSold: number,
     creation: number
   ) {
@@ -20,8 +18,7 @@ class User {
     this.minecraftUsername = minecraftUsername;
     this.nationAffiliation = nationAffiliation;
     this.location = location;
-    this.reviewsJson = reviewsJson;
-    this.itemsSold = itemsSold;
+  this.itemsSold = itemsSold;
     this.creation = creation;
   }
 }

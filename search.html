@@ -53,7 +53,7 @@
                         </div>
                     </a>
                     <br />
-                    <a class="sidebar-button-container">
+                    <a href="/post" class="sidebar-button-container">
                         <i class="bx bx-edit"></i>
                         <p>post an item</p>
                     </a>
@@ -84,7 +84,7 @@
                     <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; search</span>
                     </h1>
                     <div id="actions" class="flex-row">
-                        <a href="#" style="color: #7be459;">
+                        <a href="/post" style="color: #7be459;">
                             <i class="bx bx-edit"></i>
                         </a>
                         <a href="/acct" style="color: rgb(200, 195, 188);">
@@ -92,7 +92,13 @@
                         </a>
                     </div>
                 </header>
-                <div>
+                <div style="position: relative; height: 100%;">
+                    <div id="loading" class="loading-main-bg">
+                        <span id="spinner" class="flex-col">
+                            <i class='bx bx-refresh'
+                                style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
+                        </span>
+                    </div>
                     <span class="flex-row" id="search-actions">
                         <details class="blue-text flex-col">
                             <summary>Sort</summary>

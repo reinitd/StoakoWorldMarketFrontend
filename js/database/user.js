@@ -8,12 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 class User {
-    constructor(uuid, minecraftUsername, nationAffiliation, location, reviewsJson, itemsSold, creation) {
+    constructor(uuid, minecraftUsername, nationAffiliation, location, itemsSold, creation) {
         this.uuid = uuid;
         this.minecraftUsername = minecraftUsername;
         this.nationAffiliation = nationAffiliation;
         this.location = location;
-        this.reviewsJson = reviewsJson;
         this.itemsSold = itemsSold;
         this.creation = creation;
     }

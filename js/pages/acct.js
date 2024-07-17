@@ -17,34 +17,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const spinner = document.getElementById('spinner');
         const jwt = WMJWTDecode(apiKey);
         document.getElementById('js-head-img').setAttribute('src', `https://crafatar.com/avatars/${jwt.payload.uuid}.png`);
-        document.querySelectorAll('.js-username-here').forEach(element => {
-            element.innerHTML = jwt.payload.username + element.innerHTML;
-        });
-        document.querySelectorAll('.js-uuid-here').forEach(element => {
-            element.textContent = jwt.payload.uuid;
-        });
-        const userResult = yield fetchUser(jwt.payload.uuid);
-        if (!userResult.success) {
+        const populateUserResult = yield populateUserInfo(jwt.payload.uuid);
+        if (!populateUserResult.success) {
             spinner.remove();
             const warning = document.createElement('p');
-            warning.innerHTML = `There's been an error fetching your user data.<br/><br/><pre><code>${userResult.message}</code></pre>`;
+            warning.innerHTML = `There's been an error fetching your user data.<br/><br/><pre><code>${populateUserResult.message}</code></pre>`;
             warning.style.padding = '1rem';
             loadingScreen.appendChild(warning);
             return;
         }
-        const user = userResult.value;
-        document.querySelectorAll('.js-joindate-here').forEach(element => {
-            element.textContent = formatUnixTime(user.creation);
-        });
-        document.querySelectorAll('.js-nation-affiliation-here').forEach(element => {
-            element.textContent = user.nationAffiliation;
-        });
-        document.querySelectorAll('.js-items-sold-here').forEach(element => {
-            element.textContent = user.itemsSold.toString();
-        });
-        document.querySelectorAll('.js-location-here').forEach(element => {
-            element.textContent = user.location;
-        });
+        const user = populateUserResult.value;
         if (this.location.pathname.toLowerCase() == '/acct/edit') {
             const nationAffiliationInput = document.getElementById('js-nation-affiliation-input');
             const locationInput = document.getElementById('js-location-input');

@@ -20,6 +20,7 @@
     <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
     <link rel="stylesheet" href="/styles/global.css">
     <link rel="stylesheet" href="/styles/ce.css">
+    <link rel="stylesheet" href="/styles/post.css">
     <link rel="stylesheet" href="/styles/anims.css">
     <link rel="stylesheet" href="/styles/pieces/sidebar.css">
     <link rel="stylesheet" href="/styles/pieces/contentsection.css">
@@ -81,7 +82,7 @@
             </div>
             <div id="content" class="flex-col">
                 <header class="content border-vertical flex-center-vertical">
-                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; catalog
+                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; create catalog
                             entry</span>
                     </h1>
                     <div id="actions" class="flex-row">
@@ -100,50 +101,51 @@
                                 style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
                     </div>
-                    <div style="position: relative; height: 100%;">
-                        <strong class="js-category-link-here" id="cat"></strong>
-                        <h1><span class="js-title-here"></span> <small>&lpar;<span
-                                    class="js-quantity-here"></span>&rpar;</small></h1>
-                        <p>for <strong class="js-payment-here"></strong></p>
-                        <p>from <strong class="js-location-here"></strong></p>
-                        <p>by <strong class="js-seller-link-here"></strong></p>
-                        <p>posted <strong class="js-creation-here"></strong></p>
+                    <div style="position: relative; height: 100%; width: 100%; border-collapse:collapse;
+                    display : table;">
+                        <select type="text" name="ce-category" id="js-ce-category" placeholder="Category">
+                            <option value="">Select a Category</option>
+                            <option value="Building">Building</option>
+                            <option value="Colored">Colored</option>
+                            <option value="Natural">Natural</option>
+                            <option value="Functional">Functional</option>
+                            <option value="Redstone">Redstone</option>
+                            <option value="Ingredients">Ingredients</option>
+                            <option value="Combat">Combat</option>
+                            <option value="Food &amp; Drinks">Food &amp; Drinks</option>
+                            <option value="Tools &amp; Utility">Tools &amp; Utility</option>
+                        </select>
+                        <h1>
+                            <span>
+                                <input type="text" class="resize-input" name="ce-title" id="js-ce-title"
+                                    placeholder="Title" />
+                            </span>
+                            <small>&lpar;<span>
+                                    <input type="number" class="resize-input" name="ce-quantity" id="js-ce-quantity"
+                                        placeholder="Qty." min="1" />
+                                </span>&rpar;</small>
+                        </h1>
+                        <p>for
+                            <input type="number" class="resize-input" name="ce-price" id="js-ce-price"
+                                placeholder="Price" />
+                            <input type="text" class="resize-input" name="ce-currency" id="js-ce-currency"
+                                placeholder="Currency" />
+                        </p>
+                        <p>from
+                            <input type="text" class="resize-input" name="ce-location" id="js-ce-location"
+                                placeholder="Location" />
+                        </p>
+                        <p>by <strong class="js-user-link-here"></strong></p>
                         <br />
-                        <article class="js-description-here"></article>
+                        <textarea name="ce-description" id="js-ce-description" cols="50" rows="14">
+                            Description
+                        </textarea>
                         <br />
                         <br />
-                        <p><strong class="js-seller-name-here"></strong> is affiliated with <strong
-                                class="js-seller-affiliation-here"></strong>,</p>
-                        <p>and is located in <strong class="js-seller-location-here"></strong>.</p>
-                        <br />
-                        <hr />
-                        <br />
-                        <p style="margin-bottom: .5rem;">These <strong style="color: red;">cannot</strong> be changed
-                            after.</p>
-                        <div class="flex-row" style="gap: 1rem;">
-                            <label style="flex-shrink: 1;">
-                                Quantity
-                                <br />
-                                <input style="width: 5ch;" type="number" name="order-quantity" id="js-order-quantity"
-                                    min="1" value="1">
-                            </label>
-                            <br />
-                            <br />
-                            <label>
-                                Delivery Location
-                                <br />
-                                <input style="width: 100%;" type="text" name="order-delivery-location"
-                                    id="js-order-delivery-location">
-                                <br />
-                                <small>&lpar;Coordinates of the mailbox would be best&rpar;</small>
-                            </label>
-                            <p id="order-wrapper">
-                                <a id="order" class="submit">Order</a>
-                            </p>
-                        </div>
-                        <br />
-                        <hr />
-                        <p style="position: absolute; bottom: 0;">Avoid scams, deal locally.</p>
+                        <p><strong class="js-username-here"></strong> is affiliated with <strong
+                                class="js-nation-affiliation-here"></strong>,</p>
+                        <p>and is located in <strong class="js-location-here"></strong>.</p>
+                        <a id="submit" class="submit">Submit CE</a>
                     </div>
                 </div>
             </div>
@@ -198,8 +200,8 @@
     <script src="/js/modal.js"></script>
     <script src="/js/result.js"></script>
     <script src="/js/helpers.js"></script>
-    <script src="/js/populate/catalogEntryInfo.js"></script>
-    <script src="/js/pages/ce.js"></script>
+    <script src="/js/pages/post.js"></script>
+    <script src="/js/populate/userInfo.js"></script>
     <script src="/js/cookies.js"></script>
     <script src="/js/database/user.js"></script>
     <script src="/js/database/catalogEntry.js"></script>

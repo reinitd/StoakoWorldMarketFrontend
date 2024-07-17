@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const loadingScreen = document.getElementById('loading');
     const spinner = document.getElementById('spinner');
 
-    const ceResult = await fetchCatalogEntry(uuid);
+    const ceResult = await populateCatalogEntryInfo(uuid);
     if (!ceResult.success) {
         spinner.remove();
         const warning = document.createElement('p');
@@ -20,7 +20,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
 
     const ce = ceResult.value;
-    const payment = JSON.parse(ce.paymentJson);
 
     let seller = {
         name: 'Unknown Seller',
@@ -33,37 +32,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         seller.affiliation = sellerResult.value.nationAffiliation;
         seller.location = sellerResult.value.location;
     }
-
-    document.querySelectorAll('.js-title-here').forEach(element => {
-        element.textContent = ce.title;
-    });
-    document.querySelectorAll('.js-payment-here').forEach(element => {
-        element.textContent = `${payment.Amount} ${payment.Type}`;
-    });
-    document.querySelectorAll('.js-location-here').forEach(element => {
-        element.textContent = ce.location;
-    });
-    document.querySelectorAll('.js-category-link-here').forEach(element => {
-        const a = document.createElement('a');
-        a.href = `/search?fcategory=${ce.category}`;
-        a.target = '_blank';
-        a.textContent = ce.category;
-        element.appendChild(a);
-    });
-    document.querySelectorAll('.js-creation-here').forEach(element => {
-        element.textContent = formatUnixTimeMMDDYYYY(ce.creation);
-    });
-    document.querySelectorAll('.js-quantity-here').forEach(element => {
-        element.textContent = ce.quantity.toString();
-    });
+    
     document.querySelectorAll('.js-seller-link-here').forEach(element => {
         const a = document.createElement('a');
         a.href = `/user?uuid=${ce.sellerUuid}`;
         a.textContent = seller.name
         element.appendChild(a);
-    });
-    document.querySelectorAll('.js-possessive-seller-name-here').forEach(element => {
-        element.textContent = seller.name;
     });
     document.querySelectorAll('.js-seller-affiliation-here').forEach(element => {
         if (seller.affiliation.toLowerCase() == "unaffiliated") {
@@ -76,6 +50,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
     document.querySelectorAll('.js-seller-location-here').forEach(element => {
         element.textContent = seller.location;
+    });
+    document.querySelectorAll('.js-seller-name-here').forEach(element => {
+        element.textContent = seller.name;
     });
 
     const apiKey = getCookieValue('WORLDMARKETAPIKEY');

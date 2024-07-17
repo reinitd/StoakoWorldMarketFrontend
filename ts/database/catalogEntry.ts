@@ -38,7 +38,7 @@ class CatalogEntry {
     }
 }
 
-async function searchCatalogEntries(query:string, pageNumber:number, pageAmount:number): Promise<Result<CatalogEntry[]>> {
+async function searchCatalogEntries(query: string, pageNumber: number, pageAmount: number): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
     const url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
@@ -73,7 +73,7 @@ async function fetchCatalogEntry(uuid: string): Promise<Result<CatalogEntry>> {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         const data = await response.json();
-        
+
         result.success = data.success;
         result.message = data.message;
         result.value = data.value;
@@ -86,7 +86,7 @@ async function fetchCatalogEntry(uuid: string): Promise<Result<CatalogEntry>> {
     return result;
 }
 
-async function fetchAllCatalogEntries(pageNumber:number, pageAmount:number): Promise<Result<CatalogEntry[]>> {
+async function fetchAllCatalogEntries(pageNumber: number, pageAmount: number): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
     const url = `https://localhost/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
@@ -105,6 +105,57 @@ async function fetchAllCatalogEntries(pageNumber:number, pageAmount:number): Pro
     } catch (error) {
         result.message = error;
         console.error('Error fetching data:', error);
+    }
+
+    return result;
+}
+
+async function createCatalogEntry(
+    sellerUuid: string,
+    title: string,
+    description: string,
+    category: string,
+    location: string,
+    paymentType: string,
+    paymentAmount: string,
+    quantity: number,
+    worldMarketApiKey: string
+): Promise<Result<string>> {
+    let result = new Result<string>(false, "An unhandled error occured.", null);
+
+    const url = `https://localhost/api/v1/catalog-entry/create`;
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify({
+                SellerUuid: sellerUuid,
+                Title: title,
+                Description: description,
+                Category: category,
+                Location: location,
+                PaymentType: paymentType,
+                PaymentAmount: paymentAmount,
+                Quantity: quantity
+            }),
+            headers: {
+                "Accept": "*/*",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${worldMarketApiKey}`
+            }
+        });
+        if (!response.ok) {
+            result.message = response.status.toString();
+            throw new Error(`Http error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        result.success = data.success;
+        result.message = data.message;
+        result.value = data.value;
+
+    } catch (error) {
+        result.message = error;
+        console.error('Error updating user:', error);
     }
 
     return result;

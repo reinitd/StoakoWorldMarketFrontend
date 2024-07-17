@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     const searchResults = document.getElementById('search-results');
     const pageBack = document.getElementById('js-page-back');
     const pageForward = document.getElementById('js-page-forward');
+    const loadingScreen = document.getElementById('loading');
+    const spinner = document.getElementById('spinner');
     const filter = {
         location: document.getElementById('js-filter-location') as HTMLInputElement,
         payementType: document.getElementById('js-filter-payment-type') as HTMLInputElement,
@@ -232,4 +234,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             location.href = `/ce?uuid=${ce.getAttribute('data-uuid')}`;
         });
     });
+
+    loadingScreen.remove();
 });

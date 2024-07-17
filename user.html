@@ -19,7 +19,9 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/ce.css">
+    <link rel="stylesheet" href="/styles/user.css">
+    <link rel="stylesheet" href="/styles/acct.css">
+    <link rel="stylesheet" href="/styles/search.css">
     <link rel="stylesheet" href="/styles/anims.css">
     <link rel="stylesheet" href="/styles/pieces/sidebar.css">
     <link rel="stylesheet" href="/styles/pieces/contentsection.css">
@@ -81,8 +83,7 @@
             </div>
             <div id="content" class="flex-col">
                 <header class="content border-vertical flex-center-vertical">
-                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; catalog
-                            entry</span>
+                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; user</span>
                     </h1>
                     <div id="actions" class="flex-row">
                         <a href="/post" style="color: #7be459;">
@@ -93,57 +94,106 @@
                         </a>
                     </div>
                 </header>
-                <div id="ce-wrapper" class="content border-vertical">
-                    <div id="loading">
+                
+                <div style="position: relative;">
+                    <div id="loading" class="loading-main-bg">
                         <span id="spinner">
                             <i class='bx bx-refresh'
                                 style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
                     </div>
-                    <div style="position: relative; height: 100%;">
-                        <strong class="js-category-link-here" id="cat"></strong>
-                        <h1><span class="js-title-here"></span> <small>&lpar;<span
-                                    class="js-quantity-here"></span>&rpar;</small></h1>
-                        <p>for <strong class="js-payment-here"></strong></p>
-                        <p>from <strong class="js-location-here"></strong></p>
-                        <p>by <strong class="js-seller-link-here"></strong></p>
-                        <p>posted <strong class="js-creation-here"></strong></p>
-                        <br />
-                        <article class="js-description-here"></article>
-                        <br />
-                        <br />
-                        <p><strong class="js-seller-name-here"></strong> is affiliated with <strong
-                                class="js-seller-affiliation-here"></strong>,</p>
-                        <p>and is located in <strong class="js-seller-location-here"></strong>.</p>
-                        <br />
-                        <hr />
-                        <br />
-                        <p style="margin-bottom: .5rem;">These <strong style="color: red;">cannot</strong> be changed
-                            after.</p>
-                        <div class="flex-row" style="gap: 1rem;">
-                            <label style="flex-shrink: 1;">
-                                Quantity
-                                <br />
-                                <input style="width: 5ch;" type="number" name="order-quantity" id="js-order-quantity"
-                                    min="1" value="1">
-                            </label>
-                            <br />
-                            <br />
-                            <label>
-                                Delivery Location
-                                <br />
-                                <input style="width: 100%;" type="text" name="order-delivery-location"
-                                    id="js-order-delivery-location">
-                                <br />
-                                <small>&lpar;Coordinates of the mailbox would be best&rpar;</small>
-                            </label>
-                            <p id="order-wrapper">
-                                <a id="order" class="submit">Order</a>
-                            </p>
+                    <div class="flex-row content border-vertical" style="position: relative; gap: 1rem;
+                    justify-content: space-between; padding: .5rem 1rem;">
+                        <div>
+                            <h1 style="margin: 0;" class="js-username-here"></h1>
+                            <table id="user-info-table">
+                                <tbody>
+                                    <tr>
+                                        <th>UUID</th>
+                                        <td class="js-uuid-here"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Affiliation</th>
+                                        <td class="js-nation-affiliation-here"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Location</th>
+                                        <td class="js-location-here"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Items Sold</th>
+                                        <td class="js-items-sold-here"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Joined WM</th>
+                                        <td class="js-joindate-here"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <br />
-                        <hr />
-                        <p style="position: absolute; bottom: 0;">Avoid scams, deal locally.</p>
+                        <img id="js-head-img" alt="MC Head" />
+                    </div>
+                    <br/>
+                    <div style="position: relative; height: 100%;">
+                        <span class="flex-row" id="search-actions">
+                            <details class="blue-text flex-col">
+                                <summary>Sort</summary>
+                                <small id="js-sort-by-price-cheapest">by price (cheapest)</small>
+                                <small id="js-sort-by-price-expensive">by price (expensive)</small>
+                                <small id="js-sort-by-creation-latest">by creation (latest)</small>
+                                <small id="js-sort-by-creation-oldest">by creation (oldest)</small>
+                                <small id="js-sort-by-quantity-most">by quantity (most)</small>
+                                <small id="js-sort-by-quantity-least">by quantity (least)</small>
+                            </details>
+                            <details class="flex-col">
+                                <summary class="blue-text self">Filter</summary>
+                                <small>Location <input type="text" name="filter-location" id="js-filter-location"></small>
+                                <small>Payment Type <input type="text" name="filter-payment-type"
+                                        id="js-filter-payment-type"></small>
+                                <small>Category <input type="text" name="filter-category" id="js-filter-category"></small>
+                                <span class="flex-row" style="justify-content: end;">
+                                    <small id="js-apply-filter" class="blue-text self">Apply</small>
+                                    <small id="js-clear-filter" class="blue-text self">Clear</small>
+                                </span>
+                            </details>
+                        </span>
+                        <table id="js-search-results-table">
+                            <thead>
+                                <tr>
+                                    <th>Seller</th>
+                                    <th>Title</th>
+                                    <th>Category</th>
+                                    <th>Quantity</th>
+                                    <th>Sale Info</th> <!-- Location and Posted -->
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="search-results">
+                                <!-- <tr>
+                                    <td>
+                                        <span>
+                                            <img src="https://crafatar.com/avatars/6bff3c7f-8f32-4333-a302-ac452d1510c5.png" alt="MC Head" />
+                                        </span>
+                                    </td>
+                                    <td>Item Title</td>
+                                    <td class="ce-category">Cat</td>
+                                    <td class="ce-quantity">3</td>
+                                    <td class="flex-col">
+                                        <p class="ce-location">New Stoako</p>
+                                        <p class="ce-creation">MM/DD/YYYY</p>
+                                    </td>
+                                    <td>
+                                        <span class="ce-payment-price">17</span>
+                                        <span class="ce-payment-type">Raw Gold</span>
+                                    </td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                        <span id="page-controls" class="flex-row">
+                            <i id="js-page-back" class='bx bx-chevron-left'></i>
+                            <p id="js-page-number">1</p>
+                            <i id="js-page-forward" class='bx bx-chevron-right'></i>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -198,8 +248,8 @@
     <script src="/js/modal.js"></script>
     <script src="/js/result.js"></script>
     <script src="/js/helpers.js"></script>
-    <script src="/js/populate/catalogEntryInfo.js"></script>
-    <script src="/js/pages/ce.js"></script>
+    <script src="/js/pages/user.js"></script>
+    <script src="/js/populate/userInfo.js"></script>
     <script src="/js/cookies.js"></script>
     <script src="/js/database/user.js"></script>
     <script src="/js/database/catalogEntry.js"></script>

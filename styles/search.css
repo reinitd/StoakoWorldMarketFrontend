@@ -1,11 +1,9 @@
-table {
-    /* width: 50rem; */
+#js-search-results-table {
     width: 100%;
     text-align: left;
 }
 
-thead>tr>th {
-    /* padding: .25rem 1rem .25rem .5rem; */
+#js-search-results-table thead>tr>th {
     padding: .25rem 1rem;
     border-radius: 2px;
     background-color: var(--c-content-bg);
@@ -13,41 +11,35 @@ thead>tr>th {
     font-size: .8rem;
 }
 
-tbody>tr>td {
+#js-search-results-table tbody>tr>td {
     padding: .25rem .5rem;
 }
 
-tbody>tr>td>span {
+#js-search-results-table tbody>tr>td>span {
     display: inline-block;
     vertical-align: middle;
 }
 
-tbody>tr>td:nth-child(2) {
+#js-search-results-table tbody>tr>td:nth-child(2) {
     max-width: 15rem;
 }
 
-tbody>tr>td:nth-child(1) {
+#js-search-results-table tbody>tr>td:nth-child(1) {
     text-align: center;
     padding: 0;
 }
 
-tbody>tr>td:nth-child(1)>span>img {
+#js-search-results-table tbody>tr>td:nth-child(1)>span>img {
     max-width: 50px;
     height: auto;
     display: block;
 }
 
-tbody>tr:nth-child(even) {
+#js-search-results-table tbody>tr:nth-child(even) {
     background-color: var(--c-content-bg);
 }
 
-/* tbody > tr:nth-child(even):hover {
-    background-color: transparent;
-}
-tbody > tr:nth-child(odd):hover {
-    background-color: var(--c-content-bg);
-} */
-tbody>tr:hover {
+#js-search-results-table tbody>tr:hover {
     cursor: pointer;
     background-color: var(--c-border);
 }
