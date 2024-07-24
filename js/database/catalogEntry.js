@@ -7,6 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+class SearchFilters {
+    constructor(location, paymentType, category) {
+        this.Location = location;
+        this.PaymentType = paymentType;
+        this.Category = category;
+    }
+}
 class CatalogEntry {
     constructor(uuid, creation, title, description, category, location, paymentJson, quantity, active, lastActiveTimestamp, sellerUuid) {
         this.uuid = uuid;
@@ -22,10 +29,18 @@ class CatalogEntry {
         this.sellerUuid = sellerUuid;
     }
 }
-function searchCatalogEntries(query, pageNumber, pageAmount) {
+function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+        let url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+        const addParamToUrl = (key, value) => {
+            if (value !== null && value !== undefined && value !== '') {
+                url += `&${key}=${encodeURIComponent(value)}`;
+            }
+        };
+        addParamToUrl('flocation', filters.Location);
+        addParamToUrl('fcategory', filters.Category);
+        addParamToUrl('fpaymenttype', filters.PaymentType);
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -47,7 +62,7 @@ function searchCatalogEntries(query, pageNumber, pageAmount) {
 function fetchCatalogEntry(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
+        let url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {

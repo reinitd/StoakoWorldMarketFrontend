@@ -1,3 +1,20 @@
+class SearchFilters {
+    Location?: string;
+    PaymentType?: string;
+    Category?: string;
+
+    constructor(
+        location?: string,
+        paymentType?: string,
+        category?: string
+    ) {
+        this.Location = location;
+        this.PaymentType = paymentType;
+        this.Category = category;
+    }
+}
+
+
 class CatalogEntry {
     uuid: string;
     creation: number;
@@ -38,10 +55,19 @@ class CatalogEntry {
     }
 }
 
-async function searchCatalogEntries(query: string, pageNumber: number, pageAmount: number): Promise<Result<CatalogEntry[]>> {
+async function searchCatalogEntries(query: string, pageNumber: number, pageAmount: number, filters: SearchFilters): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+    let url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+    const addParamToUrl = (key, value) => {
+        if (value !== null && value !== undefined && value !== '') {
+            url += `&${key}=${encodeURIComponent(value)}`;
+        }
+    };
+    addParamToUrl('flocation', filters.Location);
+    addParamToUrl('fcategory', filters.Category);
+    addParamToUrl('fpaymenttype', filters.PaymentType);
+
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -65,7 +91,7 @@ async function searchCatalogEntries(query: string, pageNumber: number, pageAmoun
 async function fetchCatalogEntry(uuid: string): Promise<Result<CatalogEntry>> {
     const result = new Result<CatalogEntry>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
+    let url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {

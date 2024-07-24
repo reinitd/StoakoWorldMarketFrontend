@@ -61,3 +61,69 @@ function getParamFromUrl<T>(paramName: string, paramType: { new(value: string): 
         return null;
     }
 }
+
+async function makeCeHtml(ce: CatalogEntry) {
+    const payment = JSON.parse(ce.paymentJson);
+
+    const tr = document.createElement('tr');
+
+    const td1 = document.createElement('td');
+    const span1 = document.createElement('span');
+    const img = document.createElement('img');
+    img.src = `https://crafatar.com/avatars/${ce.sellerUuid}.png`;
+    img.alt = 'MC Head';
+    span1.appendChild(img);
+    td1.appendChild(span1);
+
+    const td2 = document.createElement('td');
+    td2.textContent = ce.title;
+
+    const td3 = document.createElement('td');
+    td3.classList.add('ce-category');
+    td3.textContent = ce.category;
+
+    const td4 = document.createElement('td');
+    td4.classList.add('ce-quantity');
+    td4.textContent = ce.quantity.toString();
+
+    const td5 = document.createElement('td');
+    td5.classList.add('flex-col');
+    const p1 = document.createElement('p');
+    p1.classList.add('ce-location');
+    p1.textContent = ce.location;
+    const p2 = document.createElement('p');
+    p2.classList.add('ce-creation');
+    p2.textContent = formatUnixTimeMMDDYYYY(ce.creation);
+    td5.appendChild(p1);
+    td5.appendChild(p2);
+
+    const td6 = document.createElement('td');
+    const span3 = document.createElement('span');
+    span3.classList.add('ce-payment-price');
+    span3.style.marginRight = '.5ch';
+    span3.textContent = payment.Amount;
+    const span4 = document.createElement('span');
+    span4.classList.add('ce-payment-type');
+    span4.textContent = payment.Type;
+    td6.appendChild(span3);
+    td6.appendChild(span4);
+
+
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    tr.appendChild(td3);
+    tr.appendChild(td4);
+    tr.appendChild(td5);
+    tr.appendChild(td6);
+
+    const userRes = await fetchUser(ce.sellerUuid);
+    if (userRes.success) {
+        tr.setAttribute('data-affiliation', userRes.value.nationAffiliation);
+        tr.setAttribute('data-seller-username', userRes.value.minecraftUsername);
+    }
+
+    tr.setAttribute('data-uuid', ce.uuid);
+    tr.setAttribute('data-creation', ce.creation.toString());
+
+    return tr;
+}
