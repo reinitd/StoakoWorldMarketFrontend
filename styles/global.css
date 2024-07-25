@@ -99,6 +99,7 @@ a:hover {
 }
 
 #container {
+    position: relative;
     width: 100%;
     height: auto;
     gap: var(--u-main-gap);
@@ -175,4 +176,7 @@ a:hover {
 }
 #dimpath {
     opacity: .73;
+}
+details summary::marker {
+    content: '';
 }

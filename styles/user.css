@@ -1,0 +1,71 @@
+#review-table {
+    text-align: left;
+}
+
+#review-table tr>*+* {
+    padding-left: 5rem;
+}
+
+#reviews {
+    gap: .75rem;
+    flex-wrap: wrap;
+    position: relative;
+    width: 30rem;
+    height: 10rem;
+    overflow-y: auto;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--c-border) transparent; /* Firefox */
+}
+
+#reviews::-webkit-scrollbar {
+    width: 16px;
+}
+
+#reviews::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#reviews::-webkit-scrollbar-thumb {
+    background-color: var(--c-border);
+    border-radius: 10px;
+    border: 0;
+}
+
+#reviews::-moz-scrollbar-button,
+#reviews::-webkit-scrollbar-button {
+  width: 0px;
+  display: none;
+}
+
+span.review {
+    flex-basis: 100%;
+    display: inline-flex;
+    max-width: 30rem;
+    height: fit-content;
+    align-items: center;
+    min-height: 0;
+}
+
+span.review>i {
+    transform: translateX(.55rem);
+}
+
+span.review>i.bx.bx-plus-circle {
+    color: rgb(100, 255, 100);
+}
+
+span.review>i.bx.bx-stop-circle {
+    color: rgb(150, 150, 150);
+}
+
+span.review>i.bx.bx-minus-circle {
+    color: rgb(255, 100, 100);
+}
+
+span.review>div>p:nth-child(1) {
+    color: rgb(150, 150, 150);
+    font-size: .7rem;
+    font-weight: bold;
+    line-height: 95%;
+    margin: 0;
+}

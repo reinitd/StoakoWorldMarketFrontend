@@ -181,7 +181,7 @@ async function createCatalogEntry(
 
     } catch (error) {
         result.message = error;
-        console.error('Error updating user:', error);
+        console.error('Error creating catalog entry:', error);
     }
 
     return result;

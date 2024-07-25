@@ -28,10 +28,9 @@ function fetchUser(uuid) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = yield response.json();
-            const user = deserialize(data.value, User);
-            result.success = true;
-            result.message = "OK.";
-            result.value = user;
+            result.success = data.success;
+            result.message = data.message;
+            result.value = data.value;
         }
         catch (error) {
             result.message = error;

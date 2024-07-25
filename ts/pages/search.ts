@@ -85,25 +85,29 @@ document.addEventListener("DOMContentLoaded", async () => {
         //     (!fPaymentType || payment.Type.toLowerCase().includes(fPaymentType.toLowerCase())) &&
         //     (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase()))
         // ) {
-            
-            const tr = await makeCeHtml(ce);
 
-            searchResults.appendChild(tr);
+        const tr = await makeCeHtml(ce);
+
+        searchResults.appendChild(tr);
         // }
     });
 
 
 
     const nextPageRes = await searchCatalogEntries(query, pageNumber + 1, pageAmount, searchFilters);
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
-        pageForward.style.cursor = 'not-allowed';
     } else {
         pageBack.onclick = () => {
             if ((pageNumber - 1) > 0) {
                 location.href = `/search?q=${query}&pageNumber=${pageNumber - 1}&pageAmount=${pageAmount}`;
             }
         };
+    }
+    
+    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+        pageForward.style.cursor = 'not-allowed';
+    } else {
         pageForward.onclick = () => {
             location.href = `/search?q=${query}&pageNumber=${pageNumber + 1}&pageAmount=${pageAmount}`;
         };

@@ -18,7 +18,7 @@ class User {
     this.minecraftUsername = minecraftUsername;
     this.nationAffiliation = nationAffiliation;
     this.location = location;
-  this.itemsSold = itemsSold;
+    this.itemsSold = itemsSold;
     this.creation = creation;
   }
 }
@@ -35,12 +35,10 @@ async function fetchUser(uuid: string): Promise<Result<User>> {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const data = await response.json();
-    const user: User = deserialize<User>(data.value, User);
 
-
-    result.success = true;
-    result.message = "OK.";
-    result.value = user;
+    result.success = data.success;
+    result.message = data.message;
+    result.value = data.value;
 
   } catch (error) {
     result.message = error;
@@ -59,7 +57,7 @@ async function updateUser(userToUpdate: User, worldMarketApiKey: string): Promis
       method: "PUT",
       body: JSON.stringify({ User: userToUpdate }),
       headers: {
-        "Accept": "*/*", 
+        "Accept": "*/*",
         "Content-Type": "application/json",
         "Authorization": `Bearer ${worldMarketApiKey}`
       }

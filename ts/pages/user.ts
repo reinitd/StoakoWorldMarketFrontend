@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async () => {
     const pageNumber: number = getParamFromUrl("pagenumber", Number) as number ?? 1;
-    const pageAmount: number = getParamFromUrl("pageamount", Number) as number ?? 20;
+    const pageAmount: number = getParamFromUrl("pageamount", Number) as number ?? 4;
     const pageBack = document.getElementById('js-page-back');
     const pageForward = document.getElementById('js-page-forward');
     const loadingScreen = document.getElementById('loading');
@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    const user = populateUserResult.value;
+    // const user = populateUserResult.value;
 
     const filter = {
         location: document.getElementById('js-filter-location') as HTMLInputElement,
@@ -41,6 +41,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     fLocation && (filter.location.value = fLocation);
     fPaymentType && (filter.payementType.value = fPaymentType);
     fCategory && (filter.category.value = fCategory);
+
+    const searchFilters = new SearchFilters(fLocation, fPaymentType, fCategory);
 
     filter.clear.onclick = () => {
         location.href = `/user?uuid=${uuid}&pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('js-page-number').textContent = pageNumber.toString();
 
-    const res = await fetchAllCatalogEntries(pageNumber, pageAmount);
+    const res = await searchCatalogEntries('', pageNumber, pageAmount, searchFilters);
 
     if (!res.success) {
         const warning = document.createElement('p');
@@ -93,29 +95,33 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         const payment = JSON.parse(ce.paymentJson);
 
-        if (
-            (!fLocation || ce.location.toLowerCase().includes(fLocation.toLowerCase())) &&
-            (!fPaymentType || payment.Type.toLowerCase().includes(fPaymentType.toLowerCase())) &&
-            (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase())) &&
-            (ce.sellerUuid == uuid)
-        ) {
+        // if (
+        //     (!fLocation || ce.location.toLowerCase().includes(fLocation.toLowerCase())) &&
+        //     (!fPaymentType || payment.Type.toLowerCase().includes(fPaymentType.toLowerCase())) &&
+        //     (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase())) &&
+        //     (ce.sellerUuid == uuid)
+        // ) {
 
             const tr = await makeCeHtml(ce);
 
             searchResults.appendChild(tr);
-        }
+        // }
     });
 
-    const nextPageRes = await fetchAllCatalogEntries(pageNumber + 1, pageAmount);
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    const nextPageRes = await searchCatalogEntries('', pageNumber + 1, pageAmount, searchFilters);
+    if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
-        pageForward.style.cursor = 'not-allowed';
     } else {
         pageBack.onclick = () => {
             if ((pageNumber - 1) > 0) {
                 location.href = `/user?uuid=${uuid}&pageNumber=${pageNumber - 1}&pageAmount=${pageAmount}`;
             }
         };
+    }
+    
+    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+        pageForward.style.cursor = 'not-allowed';
+    } else {
         pageForward.onclick = () => {
             location.href = `/user?uuid=${uuid}&pageNumber=${pageNumber + 1}&pageAmount=${pageAmount}`;
         };
@@ -180,5 +186,104 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     });
 
+    await handleReviews(uuid);
+
     loadingScreen.remove();
 });
+
+async function handleReviews(uuid: string) {
+    const reviews = document.getElementById('reviews');
+
+    const rs = await fetchReviewsFromReviewee(uuid);
+    if (!rs.success) {
+        const warning = document.createElement('p');
+        warning.innerHTML = `There's been an error fetching the review data.<br/><code>${rs.message}</code>`;
+        reviews.appendChild(warning);
+        console.error(`Error when fetching data: ${rs.message}`);
+        return;
+    }
+    if (rs.value == null || rs.value.length == 0) {
+        const warning = document.createElement('p');
+        warning.style.textAlign = 'center';
+        warning.textContent = "Seller has no reviews.";
+        reviews.appendChild(warning);
+        return;
+    }
+
+    const posr = document.getElementById('js-positive-review-here');
+    const neur = document.getElementById('js-neutral-review-here');
+    const negr = document.getElementById('js-negative-review-here');
+    const amounts = {
+        pos: 0,
+        neu: 0,
+        neg: 0,
+    }
+
+    for (const r of rs.value) {
+        const reviewerRes = await fetchUser(r.reviewerUuid);
+        if (!reviewerRes.success || reviewerRes.value == null) {
+            continue;
+        }
+
+
+        let iconClass: string;
+        switch (r.stance) {
+            case "Positive": {
+                iconClass = 'bx-plus-circle';
+                amounts.pos++;
+                break;
+            }
+            case "Negative": {
+                iconClass = 'bx-minus-circle';
+                amounts.neg++;
+                break;
+            } default: {
+                iconClass = 'bx-stop-circle';
+                amounts.neu++;
+                break;
+            }
+
+        }
+
+
+        const span = document.createElement('span');
+        span.classList.add('review');
+
+        const i = document.createElement('i');
+        i.classList.add('bx');
+        i.classList.add(iconClass);
+
+
+        const div = document.createElement('div');
+
+        const topP = document.createElement('p');
+        topP.innerHTML = `
+        <a href="/user?uuid=${r.reviewerUuid}">${reviewerRes.value.minecraftUsername}</a>
+        &bull; ${formatUnixTimeMMDDYYYY(r.creation)}
+        `;
+
+        const contentP = document.createElement('p');
+        contentP.textContent = r.content;
+
+        div.appendChild(topP);
+        div.appendChild(contentP);
+
+        span.appendChild(i);
+        span.append(div);
+
+        reviews.append(span);
+
+        posr.textContent = amounts.pos.toString();
+        neur.textContent = amounts.neu.toString();
+        negr.textContent = amounts.neg.toString();
+    }
+
+    const { pos, neu, neg } = amounts;
+    const total = pos + neu + neg;
+    const per = document.getElementById('js-positive-percent-here');
+    per.textContent = `${total > 0 ? (pos / total) * 100 : 0}%`;
+
+    const rcount = document.getElementById('js-review-count-here');
+    rcount.textContent = `(${amounts.pos}/${rs.value.length})`;
+
+}

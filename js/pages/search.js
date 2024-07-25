@@ -77,9 +77,8 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
         // }
     }));
     const nextPageRes = yield searchCatalogEntries(query, pageNumber + 1, pageAmount, searchFilters);
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
-        pageForward.style.cursor = 'not-allowed';
     }
     else {
         pageBack.onclick = () => {
@@ -87,6 +86,11 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
                 location.href = `/search?q=${query}&pageNumber=${pageNumber - 1}&pageAmount=${pageAmount}`;
             }
         };
+    }
+    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+        pageForward.style.cursor = 'not-allowed';
+    }
+    else {
         pageForward.onclick = () => {
             location.href = `/search?q=${query}&pageNumber=${pageNumber + 1}&pageAmount=${pageAmount}`;
         };

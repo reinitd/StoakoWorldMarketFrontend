@@ -94,7 +94,7 @@
                         </a>
                     </div>
                 </header>
-                
+
                 <div style="position: relative;">
                     <div id="loading" class="loading-main-bg">
                         <span id="spinner">
@@ -102,38 +102,76 @@
                                 style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
                     </div>
-                    <div class="flex-row content border-vertical" style="position: relative; gap: 1rem;
-                    justify-content: space-between; padding: .5rem 1rem;">
-                        <div>
-                            <h1 style="margin: 0;" class="js-username-here"></h1>
-                            <table id="user-info-table">
-                                <tbody>
-                                    <tr>
-                                        <th>UUID</th>
-                                        <td class="js-uuid-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Affiliation</th>
-                                        <td class="js-nation-affiliation-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Location</th>
-                                        <td class="js-location-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Items Sold</th>
-                                        <td class="js-items-sold-here"></td>
-                                    </tr>
-                                    <tr>
-                                        <th>Joined WM</th>
-                                        <td class="js-joindate-here"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <div class="flex-col content border-vertical" style="padding: .5rem 1rem;">
+                        <div class="flex-row" style="position: relative; gap: 1rem;
+                        justify-content: space-between;">
+                            <div>
+                                <h1 style="margin: 0;" class="js-username-here"></h1>
+                                <table id="user-info-table">
+                                    <tbody>
+                                        <tr>
+                                            <th>UUID</th>
+                                            <td class="js-uuid-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Affiliation</th>
+                                            <td class="js-nation-affiliation-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Location</th>
+                                            <td class="js-location-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Items Sold</th>
+                                            <td class="js-items-sold-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Joined WM</th>
+                                            <td class="js-joindate-here"></td>
+                                        </tr>
+                                        <tr>
+                                            <th>Pos. Reviews</th>
+                                            <td>
+                                                <span id="js-positive-percent-here"></span>
+                                                <small id="js-review-count-here"></small>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <img id="js-head-img" alt="MC Head" />
                         </div>
-                        <img id="js-head-img" alt="MC Head" />
+                        <details>
+                            <summary class="blue-text self">View Reviews</summary>
+                            <div class="flex-row" style="gap: 3rem; justify-content: space-between; margin-top: .5rem;">
+                                <div style="
+                                    position: sticky;
+                                    top: 0;
+                                    align-self: start;
+                                    ">
+                                    <table id="review-table">
+                                        <tbody>
+                                            <tr>
+                                                <th>Positive</th>
+                                                <td id="js-positive-review-here">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Neutral</th>
+                                                <td id="js-neutral-review-here">0</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Negative</th>
+                                                <td id="js-negative-review-here">0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div id="reviews" class="flex-row">
+                                </div>
+                            </div>
+                        </details>
                     </div>
-                    <br/>
+                    <br />
                     <div style="position: relative; height: 100%;">
                         <span class="flex-row" id="search-actions">
                             <details class="blue-text flex-col">
@@ -147,10 +185,12 @@
                             </details>
                             <details class="flex-col">
                                 <summary class="blue-text self">Filter</summary>
-                                <small>Location <input type="text" name="filter-location" id="js-filter-location"></small>
+                                <small>Location <input type="text" name="filter-location"
+                                        id="js-filter-location"></small>
                                 <small>Payment Type <input type="text" name="filter-payment-type"
                                         id="js-filter-payment-type"></small>
-                                <small>Category <input type="text" name="filter-category" id="js-filter-category"></small>
+                                <small>Category <input type="text" name="filter-category"
+                                        id="js-filter-category"></small>
                                 <span class="flex-row" style="justify-content: end;">
                                     <small id="js-apply-filter" class="blue-text self">Apply</small>
                                     <small id="js-clear-filter" class="blue-text self">Clear</small>
@@ -163,7 +203,7 @@
                                     <th>Seller</th>
                                     <th>Title</th>
                                     <th>Category</th>
-                                    <th>Quantity</th>
+                                    <th>Qty.</th>
                                     <th>Sale Info</th> <!-- Location and Posted -->
                                     <th>Price</th>
                                 </tr>
@@ -253,6 +293,7 @@
     <script src="/js/cookies.js"></script>
     <script src="/js/database/user.js"></script>
     <script src="/js/database/catalogEntry.js"></script>
+    <script src="/js/database/reviews.js"></script>
     <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>

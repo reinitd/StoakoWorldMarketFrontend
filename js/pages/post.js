@@ -24,7 +24,7 @@ function handleSubmit(worldMarketApiKey) {
         if (title.value.trim() == "") {
             error = "You must have a title.";
         }
-        if (quantity.value == "") {
+        if (quantity.value == "" || quantity.value == "0") {
             error = "You must define the quantity.";
         }
         if (price.value == "") {

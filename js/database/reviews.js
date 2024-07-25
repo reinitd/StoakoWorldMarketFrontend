@@ -7,40 +7,44 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-class SearchFilters {
-    constructor(location, paymentType, category) {
-        this.Location = location;
-        this.PaymentType = paymentType;
-        this.Category = category;
-    }
-}
-class CatalogEntry {
-    constructor(uuid, creation, title, description, category, location, paymentJson, quantity, active, lastActiveTimestamp, sellerUuid) {
+class Review {
+    constructor(uuid, reviewerUuid, revieweeUuid, stance, content, itemTitle, creation) {
         this.uuid = uuid;
+        this.reviewerUuid = reviewerUuid;
+        this.revieweeUuid = revieweeUuid;
+        this.stance = stance;
+        this.content = content;
+        this.itemTitle = itemTitle;
         this.creation = creation;
-        this.title = title;
-        this.description = description;
-        this.category = category;
-        this.location = location;
-        this.paymentJson = paymentJson;
-        this.quantity = quantity;
-        this.active = active;
-        this.lastActiveTimestamp = lastActiveTimestamp;
-        this.sellerUuid = sellerUuid;
     }
 }
-function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
+function fetchReview(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        let url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
-        const addParamToUrl = (key, value) => {
-            if (value !== null && value !== undefined && value !== '') {
-                url += `&${key}=${encodeURIComponent(value)}`;
+        const url = `https://localhost/api/v1/review/fetch/${uuid}`;
+        try {
+            const response = yield fetch(url);
+            if (!response.ok) {
+                result.message = response.status.toString();
+                throw new Error(`HTTP error! Status: ${response.status}`);
             }
-        };
-        addParamToUrl('flocation', filters.Location);
-        addParamToUrl('fcategory', filters.Category);
-        addParamToUrl('fpaymenttype', filters.PaymentType);
+            const data = yield response.json();
+            const user = deserialize(data.value, Review);
+            result.success = true;
+            result.message = "OK.";
+            result.value = user;
+        }
+        catch (error) {
+            result.message = error;
+            console.error('Error fetching data:', error);
+        }
+        return result;
+    });
+}
+function fetchReviewsFromReviewee(revieweeUuid) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = new Result(false, "An unhandled error occured.", null);
+        const url = `https://localhost/api/v1/review/fetch-from-reviewee/${revieweeUuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -59,10 +63,10 @@ function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
         return result;
     });
 }
-function fetchCatalogEntry(uuid) {
+function fetchReviewsFromReviewer(reviewerUuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        let url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
+        const url = `https://localhost/api/v1/review/fetch-from-reviewer/${reviewerUuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -81,44 +85,47 @@ function fetchCatalogEntry(uuid) {
         return result;
     });
 }
-function fetchAllCatalogEntries(pageNumber, pageAmount) {
+function deleteReview(uuid, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
-        const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
+        let result = new Result(false, "An unhandled error occured.");
+        const url = `https://localhost/api/v1/review/create/${uuid}`;
         try {
-            const response = yield fetch(url);
+            const response = yield fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${worldMarketApiKey}`
+                }
+            });
             if (!response.ok) {
                 result.message = response.status.toString();
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                throw new Error(`Http error! Status: ${response.status}`);
             }
             const data = yield response.json();
             result.success = data.success;
             result.message = data.message;
-            result.value = data.value;
         }
         catch (error) {
             result.message = error;
-            console.error('Error fetching data:', error);
+            console.error('Error creating review:', error);
         }
         return result;
     });
 }
-function createCatalogEntry(sellerUuid, title, description, category, location, paymentType, paymentAmount, quantity, worldMarketApiKey) {
+function createReview(reviewerUuid, revieweeUuid, stance, content, itemUuid, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/create`;
+        const url = `https://localhost/api/v1/review/create`;
         try {
             const response = yield fetch(url, {
                 method: "POST",
                 body: JSON.stringify({
-                    SellerUuid: sellerUuid,
-                    Title: title,
-                    Description: description,
-                    Category: category,
-                    Location: location,
-                    PaymentType: paymentType,
-                    PaymentAmount: paymentAmount,
-                    Quantity: quantity
+                    ReviewerUuid: reviewerUuid,
+                    RevieweeUuid: revieweeUuid,
+                    Stance: stance,
+                    Content: content,
+                    ItemUuid: itemUuid
                 }),
                 headers: {
                     "Accept": "*/*",
@@ -137,7 +144,7 @@ function createCatalogEntry(sellerUuid, title, description, category, location, 
         }
         catch (error) {
             result.message = error;
-            console.error('Error creating catalog entry:', error);
+            console.error('Error creating review:', error);
         }
         return result;
     });
