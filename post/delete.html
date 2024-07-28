@@ -19,7 +19,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#FF00FF"> <!-- TODO: update meta theme color -->
     <link rel="stylesheet" href="/styles/global.css">
-    <link rel="stylesheet" href="/styles/acct.css">
+    <link rel="stylesheet" href="/styles/ce.css">
+    <link rel="stylesheet" href="/styles/post.css">
     <link rel="stylesheet" href="/styles/anims.css">
     <link rel="stylesheet" href="/styles/pieces/sidebar.css">
     <link rel="stylesheet" href="/styles/pieces/contentsection.css">
@@ -81,7 +82,8 @@
             </div>
             <div id="content" class="flex-col">
                 <header class="content border-vertical flex-center-vertical">
-                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; acct</span>
+                    <h1><strong>WorldMarket</strong> <small>by Stoako</small><span id="dimpath"> &rsaquo; delete catalog
+                            entry</span>
                     </h1>
                     <div id="actions" class="flex-row">
                         <a href="/post" style="color: #7be459;">
@@ -92,51 +94,18 @@
                         </a>
                     </div>
                 </header>
-                <div id="settings-wrapper" class="content border-vertical">
-                    <div id="loading">
+                <div id="ce-wrapper" class="content border-vertical">
+                    <!-- <div id="loading">
                         <span id="spinner">
                             <i class='bx bx-refresh'
                                 style='color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite'></i>
                         </span>
-                    </div>
-                    <div class="flex-col" style="gap: .5rem; height: 100%;">
-                        <span class="flex-row"
-                            style="justify-content: space-around; margin-top: .25rem; padding-bottom: .5rem; border-bottom: 1px solid var(--c-border);">
-                            <a href="/acct/edit">Edit Account</a>
-                            <a href="/acct/vl">View Listings</a>
-                            <a href="/logout" style="color: rgb(255, 61, 0);">Log out</a>
-                        </span>
-                        <div id="settings" class="flex-row">
-                            <div>
-                                <h1>Hello, <span class="js-username-here"></span>!</h1>
-                                <table id="user-info-table">
-                                    <tbody>
-                                        <tr>
-                                            <th>UUID</th>
-                                            <td class="js-uuid-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Affiliation</th>
-                                            <td class="js-nation-affiliation-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Location</th>
-                                            <td class="js-location-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Items Sold</th>
-                                            <td class="js-items-sold-here"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>Joined WM</th>
-                                            <td class="js-joindate-here"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <img id="js-head-img" alt="MC Head" />
-                        </div>
-                    </div>
+                    </div> -->
+                    <label>
+                        <strong>UUID To Delete:</strong>
+                        <input type="text" name="uuid-to-delete" id="js-uuid-to-delete" style="width: 34ch">
+                    </label>
+                    <p id="js-delete" class="blue-text self" style="color: rgb(255, 61, 0);">Delete</p>
                 </div>
             </div>
             <div id="location" class="content border-lateral">
@@ -190,9 +159,8 @@
     <script src="/js/modal.js"></script>
     <script src="/js/result.js"></script>
     <script src="/js/helpers.js"></script>
-    <script src="/js/pages/acct.js"></script>
-    <script src="/js/populate/userInfo.js"></script>
     <script src="/js/cookies.js"></script>
+    <script src="/js/pages/postdel.js"></script>
     <script src="/js/database/user.js"></script>
     <script src="/js/database/catalogEntry.js"></script>
     <!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->

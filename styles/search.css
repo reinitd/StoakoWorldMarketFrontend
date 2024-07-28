@@ -65,9 +65,15 @@
 .ce-location::before {
     content: 'Located in ';
 }
+.ce-location.no-before::before {
+    content: none;
+}
 
 .ce-creation::before {
     content: 'Posted ';
+}
+.ce-creation.no-before::before {
+    content: none;
 }
 
 #search-actions {

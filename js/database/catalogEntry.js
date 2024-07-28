@@ -103,6 +103,28 @@ function fetchAllCatalogEntries(pageNumber, pageAmount) {
         return result;
     });
 }
+function fetchCatalogEntriesFromSeller(sellerUuid, pageNumber, pageAmount, showOnlyActive, showOnlyInactive, apiKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const result = new Result(false, "An unhandled error occured.", null);
+        const url = `https://localhost/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
+        try {
+            const response = yield fetch(url);
+            if (!response.ok) {
+                result.message = response.status.toString();
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = yield response.json();
+            result.success = data.success;
+            result.message = data.message;
+            result.value = data.value;
+        }
+        catch (error) {
+            result.message = error;
+            console.error('Error fetching data:', error);
+        }
+        return result;
+    });
+}
 function createCatalogEntry(sellerUuid, title, description, category, location, paymentType, paymentAmount, quantity, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
@@ -138,6 +160,66 @@ function createCatalogEntry(sellerUuid, title, description, category, location, 
         catch (error) {
             result.message = error;
             console.error('Error creating catalog entry:', error);
+        }
+        return result;
+    });
+}
+function updateCatalogEntry(ce, worldMarketApiKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let result = new Result(false, "An unhandled error occured.", null);
+        const url = `https://localhost/api/v1/catalog-entry/update`;
+        try {
+            const response = yield fetch(url, {
+                method: "PUT",
+                body: JSON.stringify({
+                    CatalogEntry: ce
+                }),
+                headers: {
+                    "Accept": "*/*",
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${worldMarketApiKey}`
+                }
+            });
+            if (!response.ok) {
+                result.message = response.status.toString();
+                throw new Error(`Http error! Status: ${response.status}`);
+            }
+            const data = yield response.json();
+            result.success = data.success;
+            result.message = data.message;
+            result.value = data.value;
+        }
+        catch (error) {
+            result.message = error;
+            console.error('Error updating catalog entry:', error);
+        }
+        return result;
+    });
+}
+function deleteCatalogEntry(catalogEntryUuid, worldMarketApiKey) {
+    return __awaiter(this, void 0, void 0, function* () {
+        let result = new Result(false, "An unhandled error occured.", null);
+        const url = `https://localhost/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
+        try {
+            const response = yield fetch(url, {
+                method: "DELETE",
+                headers: {
+                    "Accept": "*/*",
+                    "Authorization": `Bearer ${worldMarketApiKey}`
+                }
+            });
+            if (!response.ok) {
+                result.message = response.status.toString();
+                throw new Error(`Http error! Status: ${response.status}`);
+            }
+            const data = yield response.json();
+            result.success = data.success;
+            result.message = data.message;
+            result.value = data.value;
+        }
+        catch (error) {
+            result.message = error;
+            console.error('Error deleting catalog entry:', error);
         }
         return result;
     });

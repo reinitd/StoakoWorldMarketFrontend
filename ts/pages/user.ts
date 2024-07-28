@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         };
     }
     
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (searchResults.children.length < 20 && (nextPageRes.value == null || nextPageRes.value.length == 0)) {
         pageForward.style.cursor = 'not-allowed';
     } else {
         pageForward.onclick = () => {

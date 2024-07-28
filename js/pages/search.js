@@ -66,15 +66,8 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
         throw new Error(`Error when fetching data: ${res.message}`);
     }
     res.value.forEach((ce) => __awaiter(this, void 0, void 0, function* () {
-        const payment = JSON.parse(ce.paymentJson);
-        // if (
-        //     (!fLocation || ce.location.toLowerCase().includes(fLocation.toLowerCase())) &&
-        //     (!fPaymentType || payment.Type.toLowerCase().includes(fPaymentType.toLowerCase())) &&
-        //     (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase()))
-        // ) {
         const tr = yield makeCeHtml(ce);
         searchResults.appendChild(tr);
-        // }
     }));
     const nextPageRes = yield searchCatalogEntries(query, pageNumber + 1, pageAmount, searchFilters);
     if (pageNumber <= 1) {
@@ -87,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
             }
         };
     }
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (searchResults.children.length < 20 && (nextPageRes.value == null || nextPageRes.value.length == 0)) {
         pageForward.style.cursor = 'not-allowed';
     }
     else {

@@ -77,19 +77,8 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     res.value.forEach(async ce => {
-
-        const payment = JSON.parse(ce.paymentJson);
-
-        // if (
-        //     (!fLocation || ce.location.toLowerCase().includes(fLocation.toLowerCase())) &&
-        //     (!fPaymentType || payment.Type.toLowerCase().includes(fPaymentType.toLowerCase())) &&
-        //     (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase()))
-        // ) {
-
         const tr = await makeCeHtml(ce);
-
         searchResults.appendChild(tr);
-        // }
     });
 
 
@@ -105,7 +94,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
     }
     
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (searchResults.children.length < 20 && (nextPageRes.value == null || nextPageRes.value.length == 0)) {
         pageForward.style.cursor = 'not-allowed';
     } else {
         pageForward.onclick = () => {

@@ -136,6 +136,31 @@ async function fetchAllCatalogEntries(pageNumber: number, pageAmount: number): P
     return result;
 }
 
+async function fetchCatalogEntriesFromSeller(sellerUuid: string, pageNumber: number, pageAmount: number, showOnlyActive: boolean, showOnlyInactive: boolean, apiKey?: string): Promise<Result<CatalogEntry[]>> {
+    const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
+
+    const url = `https://localhost/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            result.message = response.status.toString();
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        result.success = data.success;
+        result.message = data.message;
+        result.value = data.value;
+
+    } catch (error) {
+        result.message = error;
+        console.error('Error fetching data:', error);
+    }
+
+    return result;
+}
+
 async function createCatalogEntry(
     sellerUuid: string,
     title: string,
@@ -182,6 +207,76 @@ async function createCatalogEntry(
     } catch (error) {
         result.message = error;
         console.error('Error creating catalog entry:', error);
+    }
+
+    return result;
+}
+
+async function updateCatalogEntry(
+    ce: CatalogEntry,
+    worldMarketApiKey: string
+) {
+    let result = new Result<string>(false, "An unhandled error occured.", null);
+
+    const url = `https://localhost/api/v1/catalog-entry/update`;
+    try {
+        const response = await fetch(url, {
+            method: "PUT",
+            body: JSON.stringify({
+                CatalogEntry: ce
+            }),
+            headers: {
+                "Accept": "*/*",
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${worldMarketApiKey}`
+            }
+        });
+        if (!response.ok) {
+            result.message = response.status.toString();
+            throw new Error(`Http error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        result.success = data.success;
+        result.message = data.message;
+        result.value = data.value;
+
+    } catch (error) {
+        result.message = error;
+        console.error('Error updating catalog entry:', error);
+    }
+
+    return result;
+}
+
+async function deleteCatalogEntry(
+    catalogEntryUuid: string,
+    worldMarketApiKey: string
+) {
+    let result = new Result<string>(false, "An unhandled error occured.", null);
+
+    const url = `https://localhost/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
+    try {
+        const response = await fetch(url, {
+            method: "DELETE",
+            headers: {
+                "Accept": "*/*",
+                "Authorization": `Bearer ${worldMarketApiKey}`
+            }
+        });
+        if (!response.ok) {
+            result.message = response.status.toString();
+            throw new Error(`Http error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        result.success = data.success;
+        result.message = data.message;
+        result.value = data.value;
+
+    } catch (error) {
+        result.message = error;
+        console.error('Error deleting catalog entry:', error);
     }
 
     return result;

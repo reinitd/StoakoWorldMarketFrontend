@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
             }
         };
     }
-    if (searchResults.children.length < 20 && nextPageRes.value.length == 0) {
+    if (searchResults.children.length < 20 && (nextPageRes.value == null || nextPageRes.value.length == 0)) {
         pageForward.style.cursor = 'not-allowed';
     }
     else {
