@@ -29,7 +29,7 @@ class Review {
 async function fetchReview(uuid: string): Promise<Result<Review>> {
     const result = new Result<Review>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/review/fetch/${uuid}`;
+    const url = `https://api.stoako.com/api/v1/review/fetch/${uuid}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -55,7 +55,7 @@ async function fetchReview(uuid: string): Promise<Result<Review>> {
 async function fetchReviewsFromReviewee(revieweeUuid: string): Promise<Result<Review[]>> {
     const result = new Result<Review[]>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/review/fetch-from-reviewee/${revieweeUuid}`;
+    const url = `https://api.stoako.com/api/v1/review/fetch-from-reviewee/${revieweeUuid}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -79,7 +79,7 @@ async function fetchReviewsFromReviewee(revieweeUuid: string): Promise<Result<Re
 async function fetchReviewsFromReviewer(reviewerUuid: string): Promise<Result<Review[]>> {
     const result = new Result<Review[]>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/review/fetch-from-reviewer/${reviewerUuid}`;
+    const url = `https://api.stoako.com/api/v1/review/fetch-from-reviewer/${reviewerUuid}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -106,7 +106,7 @@ async function deleteReview(
 ): Promise<Result> {
     let result = new Result(false, "An unhandled error occured.");
 
-    const url = `https://localhost/api/v1/review/create/${uuid}`;
+    const url = `https://api.stoako.com/api/v1/review/create/${uuid}`;
     try {
         const response = await fetch(url, {
             method: "DELETE",
@@ -143,7 +143,7 @@ async function createReview(
 ): Promise<Result<string>> {
     let result = new Result<string>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/review/create`;
+    const url = `https://api.stoako.com/api/v1/review/create`;
     try {
         const response = await fetch(url, {
             method: "POST",

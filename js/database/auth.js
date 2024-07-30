@@ -26,7 +26,7 @@ class ExchangeMcAuthResponse {
 function exchangeMcAuthCode(code) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/auth/exchange-code`;
+        const url = `https://api.stoako.com/api/v1/auth/exchange-code`;
         try {
             const response = yield fetch(url, {
                 method: "POST",
@@ -63,7 +63,7 @@ function revokeJwt(confirm) {
             result.message = "User does not have an API key cookie.";
             return result;
         }
-        const url = 'https://localhost/api/v1/auth/revoke-token';
+        const url = 'https://api.stoako.com/api/v1/auth/revoke-token';
         try {
             const response = yield fetch(url, {
                 method: "DELETE",

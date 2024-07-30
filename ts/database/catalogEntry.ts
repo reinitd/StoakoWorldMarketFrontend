@@ -58,7 +58,7 @@ class CatalogEntry {
 async function searchCatalogEntries(query: string, pageNumber: number, pageAmount: number, filters: SearchFilters): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
-    let url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+    let url = `https://api.stoako.com/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
     const addParamToUrl = (key, value) => {
         if (value !== null && value !== undefined && value !== '') {
             url += `&${key}=${encodeURIComponent(value)}`;
@@ -91,7 +91,7 @@ async function searchCatalogEntries(query: string, pageNumber: number, pageAmoun
 async function fetchCatalogEntry(uuid: string): Promise<Result<CatalogEntry>> {
     const result = new Result<CatalogEntry>(false, "An unhandled error occured.", null);
 
-    let url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
+    let url = `https://api.stoako.com/api/v1/catalog-entry/fetch/${uuid}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -115,7 +115,7 @@ async function fetchCatalogEntry(uuid: string): Promise<Result<CatalogEntry>> {
 async function fetchAllCatalogEntries(pageNumber: number, pageAmount: number): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
+    const url = `https://api.stoako.com/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -139,7 +139,7 @@ async function fetchAllCatalogEntries(pageNumber: number, pageAmount: number): P
 async function fetchCatalogEntriesFromSeller(sellerUuid: string, pageNumber: number, pageAmount: number, showOnlyActive: boolean, showOnlyInactive: boolean, apiKey?: string): Promise<Result<CatalogEntry[]>> {
     const result = new Result<CatalogEntry[]>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
+    const url = `https://api.stoako.com/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
     try {
         const response = await fetch(url);
 
@@ -174,7 +174,7 @@ async function createCatalogEntry(
 ): Promise<Result<string>> {
     let result = new Result<string>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/create`;
+    const url = `https://api.stoako.com/api/v1/catalog-entry/create`;
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -218,7 +218,7 @@ async function updateCatalogEntry(
 ) {
     let result = new Result<string>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/update`;
+    const url = `https://api.stoako.com/api/v1/catalog-entry/update`;
     try {
         const response = await fetch(url, {
             method: "PUT",
@@ -255,7 +255,7 @@ async function deleteCatalogEntry(
 ) {
     let result = new Result<string>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
+    const url = `https://api.stoako.com/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
     try {
         const response = await fetch(url, {
             method: "DELETE",

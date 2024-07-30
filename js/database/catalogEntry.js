@@ -32,7 +32,7 @@ class CatalogEntry {
 function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        let url = `https://localhost/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
+        let url = `https://api.stoako.com/api/v1/catalog-entry/search?q=${query}&pagenumber=${pageNumber}&pageamount=${pageAmount}`;
         const addParamToUrl = (key, value) => {
             if (value !== null && value !== undefined && value !== '') {
                 url += `&${key}=${encodeURIComponent(value)}`;
@@ -62,7 +62,7 @@ function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
 function fetchCatalogEntry(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        let url = `https://localhost/api/v1/catalog-entry/fetch/${uuid}`;
+        let url = `https://api.stoako.com/api/v1/catalog-entry/fetch/${uuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -84,7 +84,7 @@ function fetchCatalogEntry(uuid) {
 function fetchAllCatalogEntries(pageNumber, pageAmount) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
+        const url = `https://api.stoako.com/api/v1/catalog-entry/fetchall?pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -106,7 +106,7 @@ function fetchAllCatalogEntries(pageNumber, pageAmount) {
 function fetchCatalogEntriesFromSeller(sellerUuid, pageNumber, pageAmount, showOnlyActive, showOnlyInactive, apiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
+        const url = `https://api.stoako.com/api/v1/catalog-entry/fetch-from-seller/${sellerUuid}?pageNumber=${pageNumber}&pageAmount=${pageAmount}&showOnlyActive=${showOnlyActive}&showOnlyInactive=${showOnlyInactive}&token=${apiKey}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -128,7 +128,7 @@ function fetchCatalogEntriesFromSeller(sellerUuid, pageNumber, pageAmount, showO
 function createCatalogEntry(sellerUuid, title, description, category, location, paymentType, paymentAmount, quantity, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/create`;
+        const url = `https://api.stoako.com/api/v1/catalog-entry/create`;
         try {
             const response = yield fetch(url, {
                 method: "POST",
@@ -167,7 +167,7 @@ function createCatalogEntry(sellerUuid, title, description, category, location, 
 function updateCatalogEntry(ce, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/update`;
+        const url = `https://api.stoako.com/api/v1/catalog-entry/update`;
         try {
             const response = yield fetch(url, {
                 method: "PUT",
@@ -199,7 +199,7 @@ function updateCatalogEntry(ce, worldMarketApiKey) {
 function deleteCatalogEntry(catalogEntryUuid, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
+        const url = `https://api.stoako.com/api/v1/catalog-entry/delete/${catalogEntryUuid}`;
         try {
             const response = yield fetch(url, {
                 method: "DELETE",

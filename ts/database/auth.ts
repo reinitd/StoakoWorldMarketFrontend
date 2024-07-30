@@ -36,7 +36,7 @@ class ExchangeMcAuthResponse {
 async function exchangeMcAuthCode(code: string): Promise<Result<ExchangeMcAuthResponse>> {
     const result = new Result<ExchangeMcAuthResponse>(false, "An unhandled error occured.", null);
 
-    const url = `https://localhost/api/v1/auth/exchange-code`;
+    const url = `https://api.stoako.com/api/v1/auth/exchange-code`;
     try {
         const response = await fetch(url, {
             method: "POST",
@@ -75,7 +75,7 @@ async function revokeJwt(confirm: boolean) : Promise<Result> {
         return result;
     }
 
-    const url = 'https://localhost/api/v1/auth/revoke-token';
+    const url = 'https://api.stoako.com/api/v1/auth/revoke-token';
     try {
         const response = await fetch(url, {
             method: "DELETE",

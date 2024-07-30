@@ -27,7 +27,7 @@ class User {
 async function fetchUser(uuid: string): Promise<Result<User>> {
   const result = new Result<User>(false, "An unhandled error occured.", null);
 
-  const url = `https://localhost/api/v1/user/fetch/${uuid}`;
+  const url = `https://api.stoako.com/api/v1/user/fetch/${uuid}`;
   try {
     const response = await fetch(url);
     if (!response.ok) {
@@ -51,7 +51,7 @@ async function fetchUser(uuid: string): Promise<Result<User>> {
 async function updateUser(userToUpdate: User, worldMarketApiKey: string): Promise<Result> {
   const result = new Result(false, "An unhandled error occured.");
 
-  const url = `https://localhost/api/v1/user/update`;
+  const url = `https://api.stoako.com/api/v1/user/update`;
   try {
     const response = await fetch(url, {
       method: "PUT",

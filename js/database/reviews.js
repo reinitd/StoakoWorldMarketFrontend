@@ -21,7 +21,7 @@ class Review {
 function fetchReview(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/review/fetch/${uuid}`;
+        const url = `https://api.stoako.com/api/v1/review/fetch/${uuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -44,7 +44,7 @@ function fetchReview(uuid) {
 function fetchReviewsFromReviewee(revieweeUuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/review/fetch-from-reviewee/${revieweeUuid}`;
+        const url = `https://api.stoako.com/api/v1/review/fetch-from-reviewee/${revieweeUuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -66,7 +66,7 @@ function fetchReviewsFromReviewee(revieweeUuid) {
 function fetchReviewsFromReviewer(reviewerUuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/review/fetch-from-reviewer/${reviewerUuid}`;
+        const url = `https://api.stoako.com/api/v1/review/fetch-from-reviewer/${reviewerUuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -88,7 +88,7 @@ function fetchReviewsFromReviewer(reviewerUuid) {
 function deleteReview(uuid, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.");
-        const url = `https://localhost/api/v1/review/create/${uuid}`;
+        const url = `https://api.stoako.com/api/v1/review/create/${uuid}`;
         try {
             const response = yield fetch(url, {
                 method: "DELETE",
@@ -116,7 +116,7 @@ function deleteReview(uuid, worldMarketApiKey) {
 function createReview(reviewerUuid, revieweeUuid, stance, content, itemUuid, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         let result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/review/create`;
+        const url = `https://api.stoako.com/api/v1/review/create`;
         try {
             const response = yield fetch(url, {
                 method: "POST",

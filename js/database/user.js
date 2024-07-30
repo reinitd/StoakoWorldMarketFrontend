@@ -20,7 +20,7 @@ class User {
 function fetchUser(uuid) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.", null);
-        const url = `https://localhost/api/v1/user/fetch/${uuid}`;
+        const url = `https://api.stoako.com/api/v1/user/fetch/${uuid}`;
         try {
             const response = yield fetch(url);
             if (!response.ok) {
@@ -42,7 +42,7 @@ function fetchUser(uuid) {
 function updateUser(userToUpdate, worldMarketApiKey) {
     return __awaiter(this, void 0, void 0, function* () {
         const result = new Result(false, "An unhandled error occured.");
-        const url = `https://localhost/api/v1/user/update`;
+        const url = `https://api.stoako.com/api/v1/user/update`;
         try {
             const response = yield fetch(url, {
                 method: "PUT",
