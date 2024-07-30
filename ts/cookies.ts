@@ -12,7 +12,7 @@ function getCookieValue(cookieName: string) {
 }
 
 function setCookie(cookieName: string, cookieValue: string, cookieExp: Date) {
-    document.cookie = `WORLDMARKETAPIKEY=${json.value.worldMarketApiKey}; expires=${cookieExp.toUTCString()}; path=/; secure; samesite=strict`; // PRODUCTION
+    document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; secure; samesite=strict`; // PRODUCTION
     // document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; samesite=strict`; // DEVELOPMENT
 }
 
