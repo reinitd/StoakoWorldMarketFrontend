@@ -57,7 +57,10 @@ async function makeCeHtml(ce) {
     span1.appendChild(img);
     td1.appendChild(span1);
     const td2 = document.createElement('td');
-    td2.textContent = ce.title;
+    const td2a1 = document.createElement('a');
+    td2a1.href = `/ce?uuid=${ce.uuid}`;
+    td2a1.textContent = ce.title;
+    td2.appendChild(td2a1);
     const td3 = document.createElement('td');
     td3.classList.add('ce-category');
     td3.textContent = ce.category;
@@ -97,6 +100,9 @@ async function makeCeHtml(ce) {
     }
     tr.setAttribute('data-uuid', ce.uuid);
     tr.setAttribute('data-creation', ce.creation.toString());
+    tr.addEventListener('click', () => {
+        location.href = `/ce?uuid=${ce.uuid}`;
+    });
     return tr;
 }
 async function makeVlCeHtml(ce) {
@@ -120,7 +126,10 @@ async function makeVlCeHtml(ce) {
     td2.appendChild(td2a3);
     const td3 = document.createElement('td');
     td3.classList.add('ce-title');
-    td3.textContent = ce.title;
+    const td3a1 = document.createElement('a');
+    td3a1.href = `/ce?uuid=${ce.uuid}`;
+    td3a1.textContent = ce.title;
+    td3.appendChild(td3a1);
     const td4 = document.createElement('td');
     td4.classList.add('ce-quantity');
     td4.textContent = ce.quantity.toString();

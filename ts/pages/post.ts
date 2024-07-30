@@ -43,6 +43,8 @@ async function handleSubmit(worldMarketApiKey: string, originalCe: CatalogEntry 
     const jwt = WMJWTDecode(worldMarketApiKey);
 
     if (originalCe) {
+        const active = document.getElementById('js-ce-active') as HTMLSelectElement;
+        
         const paymentObject = {
             Type: currency.value.trim(),
             Amount: Number(price.value)
@@ -57,7 +59,7 @@ async function handleSubmit(worldMarketApiKey: string, originalCe: CatalogEntry 
             location.value.trim(),
             JSON.stringify(paymentObject),
             Number(quantity.value),
-            originalCe.active,
+            Number(active.value.trim()),
             originalCe.lastActiveTimestamp,
             jwt.payload.uuid
         );

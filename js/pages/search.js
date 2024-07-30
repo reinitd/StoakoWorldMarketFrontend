@@ -130,9 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             content: (_a = ce.getAttribute('data-seller-username')) !== null && _a !== void 0 ? _a : 'Unknown User',
             placement: 'top'
         });
-        ce.addEventListener('click', () => {
-            location.href = `/ce?uuid=${ce.getAttribute('data-uuid')}`;
-        });
     });
     loadingScreen.remove();
 });

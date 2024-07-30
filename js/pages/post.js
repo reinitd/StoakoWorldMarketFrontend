@@ -38,11 +38,12 @@ async function handleSubmit(worldMarketApiKey, originalCe = null) {
     let res;
     const jwt = WMJWTDecode(worldMarketApiKey);
     if (originalCe) {
+        const active = document.getElementById('js-ce-active');
         const paymentObject = {
             Type: currency.value.trim(),
             Amount: Number(price.value)
         };
-        const ce = new CatalogEntry(originalCe.uuid, originalCe.creation, title.value.trim(), description.value.trim(), category.value.trim(), location.value.trim(), JSON.stringify(paymentObject), Number(quantity.value), originalCe.active, originalCe.lastActiveTimestamp, jwt.payload.uuid);
+        const ce = new CatalogEntry(originalCe.uuid, originalCe.creation, title.value.trim(), description.value.trim(), category.value.trim(), location.value.trim(), JSON.stringify(paymentObject), Number(quantity.value), Number(active.value.trim()), originalCe.lastActiveTimestamp, jwt.payload.uuid);
         res = await updateCatalogEntry(ce, worldMarketApiKey);
     }
     else {
