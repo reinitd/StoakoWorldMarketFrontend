@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     // Begin CA Check
-    debugger;
     /*
     ##### NOTICE #####
     This will go away once the closed-alpha is over.
@@ -22,7 +21,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!ClosedAlphaUuids.includes(jwt.payload.uuid)) {
         document.body.innerHTML = "";
         document.body.style.backgroundColor = "#191a1b";
-        document.body.textContent = "You do not have access to the closed alpha.";
+        const p = document.createElement("p");
+        p.textContent = "You do not have access to the closed alpha.";
+        p.style.left = '50%';
+        p.style.top = '50%';
+        p.style.transform = 'translate(50%, -50%)';
     }
     // End CA Check
     const search = document.getElementById('search');
