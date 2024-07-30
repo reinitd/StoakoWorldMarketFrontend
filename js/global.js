@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     */
     const apiKey = getCookieValue("WORLDMARKETAPIKEY");
-    if (apiKey == null) {
+    if (apiKey == null && window.location.pathname != '/login') {
         window.location.replace("https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code");
     }
     // End CA Check
