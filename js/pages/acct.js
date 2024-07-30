@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const apiKey = getCookieValue("WORLDMARKETAPIKEY");
     if (apiKey == null) {
-        window.location.replace('https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fstoako.com%2Flogin&scope=profile&response_type=code');
+        window.location.replace('https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code');
     }
     const loadingScreen = document.getElementById('loading');
     const spinner = document.getElementById('spinner');
