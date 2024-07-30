@@ -1,13 +1,4 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void 0, function* () {
+document.addEventListener("DOMContentLoaded", async () => {
     var _a, _b, _c;
     const searchResults = document.getElementById('search-results');
     const pageBack = document.getElementById('js-page-back');
@@ -55,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
         location.href = fUrl;
     };
     document.getElementById('js-page-number').textContent = pageNumber.toString();
-    const res = yield searchCatalogEntries(query, pageNumber, pageAmount, searchFilters);
+    const res = await searchCatalogEntries(query, pageNumber, pageAmount, searchFilters);
     if (!res.success) {
         const warning = document.createElement('p');
         warning.innerHTML = `There's been an error fetching the search result data.<br/><br/><code>${res.message}</code>`;
@@ -65,11 +56,11 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
         loadingScreen.remove();
         throw new Error(`Error when fetching data: ${res.message}`);
     }
-    res.value.forEach((ce) => __awaiter(this, void 0, void 0, function* () {
-        const tr = yield makeCeHtml(ce);
+    res.value.forEach(async (ce) => {
+        const tr = await makeCeHtml(ce);
         searchResults.appendChild(tr);
-    }));
-    const nextPageRes = yield searchCatalogEntries(query, pageNumber + 1, pageAmount, searchFilters);
+    });
+    const nextPageRes = await searchCatalogEntries(query, pageNumber + 1, pageAmount, searchFilters);
     if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
     }
@@ -131,7 +122,7 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
     document.getElementById('js-sort-by-quantity-least').onclick = () => {
         sortTable('.ce-quantity', true);
     };
-    yield delay(250);
+    await delay(250);
     Array.from(searchResults.children).forEach((ce) => {
         var _a;
         //@ts-ignore
@@ -144,4 +135,4 @@ document.addEventListener("DOMContentLoaded", () => __awaiter(this, void 0, void
         });
     });
     loadingScreen.remove();
-}));
+});

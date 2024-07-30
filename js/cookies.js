@@ -11,8 +11,8 @@ function getCookieValue(cookieName) {
     return null;
 }
 function setCookie(cookieName, cookieValue, cookieExp) {
-    // document.cookie = `WORLDMARKETAPIKEY=${json.value.worldMarketApiKey}; expires=${expires.toUTCString()}; path=/; secure; samesite=strict`; PRODUCTION
-    document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; samesite=strict`; // DEVELOPMENT
+    document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; secure; samesite=strict`; // PRODUCTION
+    // document.cookie = `${cookieName}=${cookieValue}; expires=${cookieExp.toUTCString()}; path=/; samesite=strict`; // DEVELOPMENT
 }
 function deleteCookie(name) {
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/;';

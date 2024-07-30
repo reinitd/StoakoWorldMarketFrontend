@@ -1,13 +1,4 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void 0, function* () {
+document.addEventListener('DOMContentLoaded', async () => {
     var _a, _b;
     const pageNumber = (_a = getParamFromUrl("pagenumber", Number)) !== null && _a !== void 0 ? _a : 1;
     const pageAmount = (_b = getParamFromUrl("pageamount", Number)) !== null && _b !== void 0 ? _b : 4;
@@ -21,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
         window.location.replace('/');
     }
     document.getElementById('js-head-img').setAttribute('src', `https://crafatar.com/avatars/${uuid}.png`);
-    const populateUserResult = yield populateUserInfo(uuid);
+    const populateUserResult = await populateUserInfo(uuid);
     if (!populateUserResult.success) {
         spinner.remove();
         const warning = document.createElement('p');
@@ -69,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
         location.href = fUrl;
     };
     document.getElementById('js-page-number').textContent = pageNumber.toString();
-    const res = yield searchCatalogEntries('', pageNumber, pageAmount, searchFilters);
+    const res = await searchCatalogEntries('', pageNumber, pageAmount, searchFilters);
     if (!res.success) {
         const warning = document.createElement('p');
         warning.innerHTML = `There's been an error fetching the search result data.<br/><br/><code>${res.message}</code>`;
@@ -78,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
         document.getElementById('js-search-results-table').remove();
         throw new Error(`Error when fetching data: ${res.message}`);
     }
-    res.value.forEach((ce) => __awaiter(this, void 0, void 0, function* () {
+    res.value.forEach(async (ce) => {
         const payment = JSON.parse(ce.paymentJson);
         // if (
         //     (!fLocation || ce.location.toLowerCase().includes(fLocation.toLowerCase())) &&
@@ -86,11 +77,11 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
         //     (!fCategory || ce.category.toLowerCase().includes(fCategory.toLowerCase())) &&
         //     (ce.sellerUuid == uuid)
         // ) {
-        const tr = yield makeCeHtml(ce);
+        const tr = await makeCeHtml(ce);
         searchResults.appendChild(tr);
         // }
-    }));
-    const nextPageRes = yield searchCatalogEntries('', pageNumber + 1, pageAmount, searchFilters);
+    });
+    const nextPageRes = await searchCatalogEntries('', pageNumber + 1, pageAmount, searchFilters);
     if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
     }
@@ -152,91 +143,89 @@ document.addEventListener('DOMContentLoaded', () => __awaiter(this, void 0, void
     document.getElementById('js-sort-by-quantity-least').onclick = () => {
         sortTable('.ce-quantity', true);
     };
-    yield delay(250);
+    await delay(250);
     Array.from(searchResults.children).forEach((ce) => {
         ce.addEventListener('click', () => {
             location.href = `/ce?uuid=${ce.getAttribute('data-uuid')}`;
         });
     });
-    yield handleReviews(uuid);
+    await handleReviews(uuid);
     loadingScreen.remove();
-}));
-function handleReviews(uuid) {
-    return __awaiter(this, void 0, void 0, function* () {
-        const reviews = document.getElementById('reviews');
-        const rs = yield fetchReviewsFromReviewee(uuid);
-        if (!rs.success) {
-            const warning = document.createElement('p');
-            warning.innerHTML = `There's been an error fetching the review data.<br/><code>${rs.message}</code>`;
-            reviews.appendChild(warning);
-            console.error(`Error when fetching data: ${rs.message}`);
-            return;
+});
+async function handleReviews(uuid) {
+    const reviews = document.getElementById('reviews');
+    const rs = await fetchReviewsFromReviewee(uuid);
+    if (!rs.success) {
+        const warning = document.createElement('p');
+        warning.innerHTML = `There's been an error fetching the review data.<br/><code>${rs.message}</code>`;
+        reviews.appendChild(warning);
+        console.error(`Error when fetching data: ${rs.message}`);
+        return;
+    }
+    if (rs.value == null || rs.value.length == 0) {
+        const warning = document.createElement('p');
+        warning.style.textAlign = 'center';
+        warning.textContent = "Seller has no reviews.";
+        reviews.appendChild(warning);
+        return;
+    }
+    const posr = document.getElementById('js-positive-review-here');
+    const neur = document.getElementById('js-neutral-review-here');
+    const negr = document.getElementById('js-negative-review-here');
+    const amounts = {
+        pos: 0,
+        neu: 0,
+        neg: 0,
+    };
+    for (const r of rs.value) {
+        const reviewerRes = await fetchUser(r.reviewerUuid);
+        if (!reviewerRes.success || reviewerRes.value == null) {
+            continue;
         }
-        if (rs.value == null || rs.value.length == 0) {
-            const warning = document.createElement('p');
-            warning.style.textAlign = 'center';
-            warning.textContent = "Seller has no reviews.";
-            reviews.appendChild(warning);
-            return;
+        let iconClass;
+        switch (r.stance) {
+            case "Positive": {
+                iconClass = 'bx-plus-circle';
+                amounts.pos++;
+                break;
+            }
+            case "Negative": {
+                iconClass = 'bx-minus-circle';
+                amounts.neg++;
+                break;
+            }
+            default: {
+                iconClass = 'bx-stop-circle';
+                amounts.neu++;
+                break;
+            }
         }
-        const posr = document.getElementById('js-positive-review-here');
-        const neur = document.getElementById('js-neutral-review-here');
-        const negr = document.getElementById('js-negative-review-here');
-        const amounts = {
-            pos: 0,
-            neu: 0,
-            neg: 0,
-        };
-        for (const r of rs.value) {
-            const reviewerRes = yield fetchUser(r.reviewerUuid);
-            if (!reviewerRes.success || reviewerRes.value == null) {
-                continue;
-            }
-            let iconClass;
-            switch (r.stance) {
-                case "Positive": {
-                    iconClass = 'bx-plus-circle';
-                    amounts.pos++;
-                    break;
-                }
-                case "Negative": {
-                    iconClass = 'bx-minus-circle';
-                    amounts.neg++;
-                    break;
-                }
-                default: {
-                    iconClass = 'bx-stop-circle';
-                    amounts.neu++;
-                    break;
-                }
-            }
-            const span = document.createElement('span');
-            span.classList.add('review');
-            const i = document.createElement('i');
-            i.classList.add('bx');
-            i.classList.add(iconClass);
-            const div = document.createElement('div');
-            const topP = document.createElement('p');
-            topP.innerHTML = `
+        const span = document.createElement('span');
+        span.classList.add('review');
+        const i = document.createElement('i');
+        i.classList.add('bx');
+        i.classList.add(iconClass);
+        const div = document.createElement('div');
+        const topP = document.createElement('p');
+        topP.innerHTML = `
         <a href="/user?uuid=${r.reviewerUuid}">${reviewerRes.value.minecraftUsername}</a>
         &bull; ${formatUnixTimeMMDDYYYY(r.creation)}
         `;
-            const contentP = document.createElement('p');
-            contentP.textContent = r.content;
-            div.appendChild(topP);
-            div.appendChild(contentP);
-            span.appendChild(i);
-            span.append(div);
-            reviews.append(span);
-            posr.textContent = amounts.pos.toString();
-            neur.textContent = amounts.neu.toString();
-            negr.textContent = amounts.neg.toString();
-        }
-        const { pos, neu, neg } = amounts;
-        const total = pos + neu + neg;
-        const per = document.getElementById('js-positive-percent-here');
-        per.textContent = `${total > 0 ? (pos / total) * 100 : 0}%`;
-        const rcount = document.getElementById('js-review-count-here');
-        rcount.textContent = `(${amounts.pos}/${rs.value.length})`;
-    });
+        const contentP = document.createElement('p');
+        contentP.textContent = r.content;
+        div.appendChild(topP);
+        div.appendChild(contentP);
+        span.appendChild(i);
+        span.append(div);
+        reviews.append(span);
+        posr.textContent = amounts.pos.toString();
+        neur.textContent = amounts.neu.toString();
+        negr.textContent = amounts.neg.toString();
+    }
+    const { pos, neu, neg } = amounts;
+    const total = pos + neu + neg;
+    const per = document.getElementById('js-positive-percent-here');
+    per.textContent = `${total > 0 ? (pos / total) * 100 : 0}%`;
+    const rcount = document.getElementById('js-review-count-here');
+    rcount.textContent = `(${amounts.pos}/${rs.value.length})`;
 }
