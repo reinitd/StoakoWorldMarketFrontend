@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         spinner.remove();
         status.remove();
         const warning = document.createElement('p');
-        warning.innerHTML = `There's been an error exchanging the MC-Auth code.<br/><br/><pre><code>${exchangeRes.message}</code></pre>`;
+        warning.innerHTML = `There's been an error exchanging the MC-Auth code.<br/><br/><code>${exchangeRes.message}</code>`;
         warning.style.padding = '1rem';
         loadingScreen.appendChild(warning);
         return;

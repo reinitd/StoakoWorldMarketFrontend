@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!ceResult.success) {
             spinner.remove();
             const warning = document.createElement('p');
-            warning.innerHTML = `There's been an error fetching the catalog entry data.<br/><br/><pre><code>${ceResult.message}</code></pre>`;
+            warning.innerHTML = `There's been an error fetching the catalog entry data.<br/><br/><code>${ceResult.message}</code>`;
             warning.style.padding = '1rem';
             loadingScreen.appendChild(warning);
             return;

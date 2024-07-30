@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!ceRes.success) {
                 ceWrapper.innerHTML = '';
                 const warning = document.createElement('p');
-                warning.innerHTML = `There's been an error fetching the CE data.<br/><br/><pre><code>${ceRes.message}</code></pre>`;
+                warning.innerHTML = `There's been an error fetching the CE data.<br/><br/><code>${ceRes.message}</code>`;
                 warning.style.padding = '1rem';
                 ceWrapper.appendChild(warning);
                 return;
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             if (!delRes.success) {
                 ceWrapper.innerHTML = '';
                 const warning = document.createElement('p');
-                warning.innerHTML = `There's been an error deleting the CE.<br/><br/><pre><code>${ceRes.message}</code></pre>`;
+                warning.innerHTML = `There's been an error deleting the CE.<br/><br/><code>${ceRes.message}</code>`;
                 warning.style.padding = '1rem';
                 ceWrapper.appendChild(warning);
                 return;
