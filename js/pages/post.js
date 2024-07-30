@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (!ceRes.success) {
             spinner.remove();
             const warning = document.createElement('p');
-            warning.innerHTML = `There's been an error fetching the CE data.<br/><br/><pre><code>${ceRes.message}</code></pre>`;
+            warning.innerHTML = `There's been an error fetching the CE data.<br/><br/><code>${ceRes.message}</code>`;
             warning.style.padding = '1rem';
             loadingScreen.appendChild(warning);
             return;
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (!populateUserResult.success) {
         spinner.remove();
         const warning = document.createElement('p');
-        warning.innerHTML = `There's been an error fetching your user data.<br/><br/><pre><code>${populateUserResult.message}</code></pre>`;
+        warning.innerHTML = `There's been an error fetching your user data.<br/><br/><code>${populateUserResult.message}</code>`;
         warning.style.padding = '1rem';
         loadingScreen.appendChild(warning);
         return;

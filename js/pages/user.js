@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!populateUserResult.success) {
         spinner.remove();
         const warning = document.createElement('p');
-        warning.innerHTML = `There's been an error fetching your user data.<br/><br/><pre><code>${populateUserResult.message}</code></pre>`;
+        warning.innerHTML = `There's been an error fetching your user data.<br/><br/><code>${populateUserResult.message}</code>`;
         warning.style.padding = '1rem';
         loadingScreen.appendChild(warning);
         return;

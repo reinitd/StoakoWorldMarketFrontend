@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         spinner.remove();
         status.remove();
         const warning = document.createElement('p');
-        warning.innerHTML = `There's been an error revoking your token.<br/><br/><pre><code>${revokeRes.message}</code></pre>`;
+        warning.innerHTML = `There's been an error revoking your token.<br/><br/><code>${revokeRes.message}</code>`;
         warning.style.padding = '1rem';
         loadingScreen.appendChild(warning);
         return;
