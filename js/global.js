@@ -8,24 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     
     */
     const apiKey = getCookieValue("WORLDMARKETAPIKEY");
-    const jwt = WMJWTDecode(apiKey);
-    const ClosedAlphaUuids = [
-        // "6bff3c7f-8f32-4333-a302-ac452d1510c5", // thesandmannn
-        "43de37b5-be49-41a1-bbc5-9c427356fc15", // 3r5x4
-        "d5c6e3f8-5b45-4ad4-a02d-341978f76683", // catpaco
-        "d2621d6f-b052-4341-b73f-0146a164739e", // goomyman77
-        "e40b7ff3-293b-40f4-b87e-f6edda0a5893", // Habit_Cat
-        "77139ecd-6f32-4a63-87fa-062ec259a251", // mejackmac
-        "44db08ca-6b6b-46e8-8e15-345b65bbd933", // Pirka
-    ];
-    if (!ClosedAlphaUuids.includes(jwt.payload.uuid)) {
-        document.body.innerHTML = "";
-        document.body.style.backgroundColor = "#191a1b";
-        const p = document.createElement("p");
-        p.textContent = "You do not have access to the closed alpha.";
-        p.style.left = '50%';
-        p.style.top = '50%';
-        p.style.transform = 'translate(50%, -50%)';
+    if (apiKey == null) {
+        window.location.replace("https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code");
     }
     // End CA Check
     const search = document.getElementById('search');
