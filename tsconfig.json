@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "rootDir": "ts",
-    "outDir": "js",
-    "esModuleInterop": true,
-    "skipLibCheck": true
+    "outDir": "js"
   },
   "include": ["ts/**/*"],
   "exclude": ["node_modules"]

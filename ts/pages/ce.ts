@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const loadingScreen = document.getElementById('loading');
     const spinner = document.getElementById('spinner');
 
-    //@ts-expect-error
     const ceResult = await populateCatalogEntryInfo(uuid);
     if (!ceResult.success) {
         spinner.remove();

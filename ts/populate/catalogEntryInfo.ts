@@ -1,5 +1,3 @@
-import DOMPurify from 'dompurify';
-
 function extractTextFromHtml(html: string): string {
     const sanitizedHtml = DOMPurify.sanitize(html);
 
