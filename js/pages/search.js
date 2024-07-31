@@ -122,14 +122,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('js-sort-by-quantity-least').onclick = () => {
         sortTable('.ce-quantity', true);
     };
-    await delay(250);
-    Array.from(searchResults.children).forEach((ce) => {
-        var _a;
-        //@ts-ignore
-        tippy(ce.children[0], {
-            content: (_a = ce.getAttribute('data-seller-username')) !== null && _a !== void 0 ? _a : 'Unknown User',
-            placement: 'top'
-        });
-    });
+    // await delay(250);
+    // Array.from(searchResults.children).forEach((ce: HTMLElement) => {
+    //     //@ts-ignore
+    //     tippy(ce.children[0], {
+    //         content: ce.getAttribute('data-seller-username') ?? 'Unknown User',
+    //         placement: 'top'
+    //     });
+    // });
     loadingScreen.remove();
 });

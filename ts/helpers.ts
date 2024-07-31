@@ -77,6 +77,7 @@ async function makeCeHtml(ce: CatalogEntry) {
 
     const td2 = document.createElement('td');
     const td2a1 = document.createElement('a');
+    td2a1.style.color = 'rgba(255, 255, 255, 0.87)';
     td2a1.href = `/ce?uuid=${ce.uuid}`;
     td2a1.textContent = ce.title;
     td2.appendChild(td2a1);
@@ -119,10 +120,12 @@ async function makeCeHtml(ce: CatalogEntry) {
     tr.appendChild(td5);
     tr.appendChild(td6);
 
+    let tippyContent = 'Unknown User';
     const userRes = await fetchUser(ce.sellerUuid);
     if (userRes.success) {
         tr.setAttribute('data-affiliation', userRes.value.nationAffiliation);
         tr.setAttribute('data-seller-username', userRes.value.minecraftUsername);
+        tippyContent = userRes.value.minecraftUsername;
     }
 
     tr.setAttribute('data-uuid', ce.uuid);
@@ -132,6 +135,11 @@ async function makeCeHtml(ce: CatalogEntry) {
         location.href = `/ce?uuid=${ce.uuid}`;
     });
 
+    //@ts-ignore
+    tippy(tr, {
+        content: tippyContent,
+        placement: 'top'
+    });
     return tr;
 }
 
@@ -160,6 +168,7 @@ async function makeVlCeHtml(ce: CatalogEntry) {
     const td3 = document.createElement('td');
     td3.classList.add('ce-title');
     const td3a1 = document.createElement('a');
+    td3a1.style.color = 'rgba(255, 255, 255, 0.87)';
     td3a1.href = `/ce?uuid=${ce.uuid}`;
     td3a1.textContent = ce.title;
     td3.appendChild(td3a1);

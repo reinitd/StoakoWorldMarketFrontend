@@ -155,14 +155,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     };
 
 
-    await delay(250);
-    Array.from(searchResults.children).forEach((ce: HTMLElement) => {
-        //@ts-ignore
-        tippy(ce.children[0], {
-            content: ce.getAttribute('data-seller-username') ?? 'Unknown User',
-            placement: 'top'
-        });
-    });
+    // await delay(250);
+    // Array.from(searchResults.children).forEach((ce: HTMLElement) => {
+    //     //@ts-ignore
+    //     tippy(ce.children[0], {
+    //         content: ce.getAttribute('data-seller-username') ?? 'Unknown User',
+    //         placement: 'top'
+    //     });
+    // });
 
     loadingScreen.remove();
 });
