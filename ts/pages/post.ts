@@ -168,10 +168,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         location.value = ce.location;
         description.value = ce.description;
 
-        if (window.location.pathname = '/post/edit') {
-            const active = document.getElementById('js-ce-active') as HTMLSelectElement;
-            active.value = ce.active.toString();
-        }
+        // if (window.location.pathname = '/post/edit') {
+        //     const active = document.getElementById('js-ce-active') as HTMLSelectElement;
+        //     active.value = ce.active.toString();
+        // }
     }
 
     const populateUserResult = await populateUserInfo(jwt.payload.uuid);
