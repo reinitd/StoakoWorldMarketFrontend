@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         warning.style.padding = '1rem';
         searchResults.parentElement.parentElement.appendChild(warning);
         document.getElementById('js-search-results-table').remove();
+        loadingScreen.remove();
         throw new Error(`Error when fetching data: ${res.message}`);
     }
     res.value.forEach(async (ce) => {
