@@ -48,9 +48,12 @@ async function searchCatalogEntries(query, pageNumber, pageAmount, filters) {
     }
     return result;
 }
-async function fetchCatalogEntry(uuid) {
+async function fetchCatalogEntry(uuid, apiKey) {
     const result = new Result(false, "An unhandled error occured.", null);
     let url = `https://api.stoako.com/api/v1/catalog-entry/fetch/${uuid}`;
+    if (apiKey != null) {
+        url += `?token=${apiKey}`;
+    }
     try {
         const response = await fetch(url);
         if (!response.ok) {
