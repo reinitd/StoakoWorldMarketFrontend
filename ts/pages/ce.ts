@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const loadingScreen = document.getElementById('loading');
     const spinner = document.getElementById('spinner');
 
-    //@ts-ignore
+    //@ts-expect-error
     const ceResult = await populateCatalogEntryInfo(uuid);
     if (!ceResult.success) {
         spinner.remove();
@@ -67,5 +67,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     loadingScreen.remove();
+    //@ts-ignore
+    tippy('#tippy-reload', { content: "Refresh username", placement: 'right', delay: [500, 0] });
 });
-
