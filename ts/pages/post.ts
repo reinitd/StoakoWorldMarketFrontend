@@ -157,6 +157,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         const currency = document.getElementById('js-ce-currency') as HTMLInputElement;
         const location = document.getElementById('js-ce-location') as HTMLInputElement;
         const description = document.getElementById('js-ce-description') as HTMLTextAreaElement;
+        const active = document.getElementById('js-ce-active') as HTMLSelectElement;
 
         const payment = JSON.parse(ce.paymentJson);
 
@@ -167,11 +168,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         currency.value = payment.Type;
         location.value = ce.location;
         description.value = ce.description;
-
-        // if (window.location.pathname = '/post/edit') {
-        //     const active = document.getElementById('js-ce-active') as HTMLSelectElement;
-        //     active.value = ce.active.toString();
-        // }
+        active.value = ce.active.toString();
     }
 
     const populateUserResult = await populateUserInfo(jwt.payload.uuid);
