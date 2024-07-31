@@ -1,3 +1,13 @@
+import DOMPurify from 'dompurify';
+
+function extractTextFromHtml(html: string): string {
+    const sanitizedHtml = DOMPurify.sanitize(html);
+
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(sanitizedHtml, 'text/html');
+    return doc.body.textContent || '';
+}
+
 
 async function populateCatalogEntryInfo(uuid:string) : Promise<Result<CatalogEntry>> {
     let result = new Result<CatalogEntry>(false, "An unhandled error occured.", null);
@@ -22,7 +32,8 @@ async function populateCatalogEntryInfo(uuid:string) : Promise<Result<CatalogEnt
         element.textContent = ce.location;
     });
     document.querySelectorAll('.js-description-here').forEach(element => {
-        element.textContent = ce.description;
+        let desc = extractTextFromHtml(ce.description).replace(':smile:', '<img src="/assets/emotes/smile.gif" alt="smiley"/>');
+        element.innerHTML = desc;
     });
     document.querySelectorAll('.js-category-link-here').forEach(element => {
         const a = document.createElement('a');

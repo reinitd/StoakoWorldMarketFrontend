@@ -1,3 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const dompurify_1 = require("dompurify");
+function extractTextFromHtml(html) {
+    const sanitizedHtml = dompurify_1.default.sanitize(html);
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(sanitizedHtml, 'text/html');
+    return doc.body.textContent || '';
+}
 async function populateCatalogEntryInfo(uuid) {
     let result = new Result(false, "An unhandled error occured.", null);
     const ceResult = await fetchCatalogEntry(uuid);
@@ -18,7 +27,8 @@ async function populateCatalogEntryInfo(uuid) {
         element.textContent = ce.location;
     });
     document.querySelectorAll('.js-description-here').forEach(element => {
-        element.textContent = ce.description;
+        let desc = extractTextFromHtml(ce.description).replace(':smile:', '<img src="/assets/emotes/smile.gif" alt="smiley"/>');
+        element.innerHTML = desc;
     });
     document.querySelectorAll('.js-category-link-here').forEach(element => {
         const a = document.createElement('a');
