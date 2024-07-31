@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     document.getElementById('submit').onclick = async () => {
         const submitRes = await handleSubmit(apiKey, originalCe);
-        const successHtml = `Successfully created catalog entry.<br/><p class="blue-text self" onclick="window.location.replace('/ce?uuid=${submitRes.value}')">View it here.</p>`;
+        const successHtml = `Successfully created catalog entry.<br/><p class="blue-text self" onclick="window.location.replace('/ce?uuid=${submitRes.value}')">View it here.</p><br/><small>If you set the CE to be not active, then you will only be able to view it on your <a href="/acct/vl">profile</a>.</small>`;
         showModal({ title: submitRes.success ? "Success" : "Uh oh.", content: submitRes.success ? successHtml : submitRes.message });
     };
 });
