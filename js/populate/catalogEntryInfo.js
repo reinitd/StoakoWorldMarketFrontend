@@ -24,7 +24,11 @@ async function populateCatalogEntryInfo(uuid) {
         element.textContent = ce.location;
     });
     document.querySelectorAll('.js-description-here').forEach(element => {
-        let desc = extractTextFromHtml(ce.description).replace(':smile:', '<img src="/assets/emotes/smile.gif" alt="smiley"/>');
+        let desc = extractTextFromHtml(ce.description)
+            .replace(':smile:', '<img src="/assets/emotes/smile.gif" alt="smiley"/>')
+            .replace(':metal:', '<img src="/assets/emotes/metal.gif" alt="metal"/>')
+            .replace(':thumbup:', '<img src="/assets/emotes/thumbup.gif" alt="thumbup"/>')
+            .replace(':banghead:', '<img src="/assets/emotes/banghead.gif" alt="banghead"/>');
         element.innerHTML = desc;
     });
     document.querySelectorAll('.js-category-link-here').forEach(element => {
