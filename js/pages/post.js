@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         if (uuid == null) {
             window.location.replace('/');
         }
-        const ceRes = await fetchCatalogEntry(uuid);
+        const ceRes = await fetchCatalogEntry(uuid, apiKey);
         if (!ceRes.success) {
             spinner.remove();
             const warning = document.createElement('p');
