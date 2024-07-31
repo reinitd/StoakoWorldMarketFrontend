@@ -31,6 +31,16 @@ async function handleEdit(user, apiKey) {
     const nationAffiliationInput = document.getElementById('js-nation-affiliation-input');
     const locationInput = document.getElementById('js-location-input');
     const submit = document.getElementById('js-submit-edits');
+    //@ts-ignore
+    tippy(nationAffiliationInput, {
+        content: "Your nation or political entity.",
+        placement: "top"
+    });
+    //@ts-ignore
+    tippy(locationInput, {
+        content: "Where you buy or sell from.",
+        placement: "top"
+    });
     nationAffiliationInput.setAttribute('value', user.nationAffiliation);
     nationAffiliationInput.setAttribute('placeholder', user.nationAffiliation);
     locationInput.setAttribute('value', user.location);
