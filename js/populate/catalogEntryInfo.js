@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const dompurify_1 = require("dompurify");
+import DOMPurify from 'dompurify';
 function extractTextFromHtml(html) {
-    const sanitizedHtml = dompurify_1.default.sanitize(html);
+    const sanitizedHtml = DOMPurify.sanitize(html);
     const parser = new DOMParser();
     const doc = parser.parseFromString(sanitizedHtml, 'text/html');
     return doc.body.textContent || '';
