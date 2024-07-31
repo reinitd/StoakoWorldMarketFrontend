@@ -107,7 +107,7 @@ async function makeCeHtml(ce) {
         location.href = `/ce?uuid=${ce.uuid}`;
     });
     //@ts-ignore
-    tippy(tr, {
+    tippy(td1, {
         content: tippyContent,
         placement: 'top'
     });

@@ -122,13 +122,5 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById('js-sort-by-quantity-least').onclick = () => {
         sortTable('.ce-quantity', true);
     };
-    // await delay(250);
-    // Array.from(searchResults.children).forEach((ce: HTMLElement) => {
-    //     //@ts-ignore
-    //     tippy(ce.children[0], {
-    //         content: ce.getAttribute('data-seller-username') ?? 'Unknown User',
-    //         placement: 'top'
-    //     });
-    // });
     loadingScreen.remove();
 });

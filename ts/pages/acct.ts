@@ -31,8 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     loadingScreen.remove();
-    //@ts-ignore
-    tippy('#tippy-reload', { content: "Refresh username", placement: 'right', delay: [500, 0] });
 });
 
 async function handleEdit(user:User, apiKey:string) {

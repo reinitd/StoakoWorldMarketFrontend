@@ -136,7 +136,7 @@ async function makeCeHtml(ce: CatalogEntry) {
     });
 
     //@ts-ignore
-    tippy(tr, {
+    tippy(td1, {
         content: tippyContent,
         placement: 'top'
     });
