@@ -4,18 +4,6 @@ function extractTextFromHtml(html) {
     const doc = parser.parseFromString(sanitizedHtml, 'text/html');
     return doc.body.textContent || '';
 }
-const emoteMap = {
-    ':smile:': '<img src="/assets/emotes/smile.gif" alt="smiley"/>',
-    ':metal:': '<img src="/assets/emotes/metal.gif" alt="metal"/>',
-    ':thumbup:': '<img src="/assets/emotes/thumbup.gif" alt="thumbup"/>',
-    ':thumbdown:': '<img src="/assets/emotes/thumbdown.gif" alt="thumbdown"/>',
-    ':banghead:': '<img src="/assets/emotes/banghead.gif" alt="banghead"/>',
-    ':feedback:': '<img src="/assets/emotes/feedback.gif" alt="feedback"/>',
-    ':crazy:': '<img src="/assets/emotes/crazy.gif" alt="crazy"/>',
-    ':biggrin:': '<img src="/assets/emotes/biggrin.gif" alt="biggrin"/>',
-    ':beer:': '<img src="/assets/emotes/beer.gif" alt="beer"/>',
-    ':party:': '<img src="/assets/emotes/party.gif" alt="party"/>',
-};
 async function populateCatalogEntryInfo(uuid) {
     let result = new Result(false, "An unhandled error occured.", null);
     const ceResult = await fetchCatalogEntry(uuid);

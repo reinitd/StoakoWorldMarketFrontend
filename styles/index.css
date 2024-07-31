@@ -12,3 +12,16 @@
 .grid-3x3 * {
     box-sizing: border-box;
 }
+
+#notice {
+    display: inline-flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 1rem;
+    margin: 2rem;
+    background-color: var(--c-content-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 7px;
+}

@@ -30,13 +30,8 @@ function formatUnixTimeMMDDYYYY(unixTime: number): string {
     return `${mm}/${dd}/${yyyy}`;
 }
 
-
 function isEmpty(value: string): boolean {
     return value === null || value === undefined || value.trim() === '';
-}
-
-function delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 function getParamFromUrl<T>(paramName: string, paramType: { new(value: string): T }): T | null {

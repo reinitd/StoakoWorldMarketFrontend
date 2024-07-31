@@ -25,9 +25,6 @@ function formatUnixTimeMMDDYYYY(unixTime) {
 function isEmpty(value) {
     return value === null || value === undefined || value.trim() === '';
 }
-function delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 function getParamFromUrl(paramName, paramType) {
     const urlParams = new URLSearchParams(window.location.search);
     const actualParamName = Array.from(urlParams.keys()).find(key => key.toLowerCase() === paramName.toLowerCase());
