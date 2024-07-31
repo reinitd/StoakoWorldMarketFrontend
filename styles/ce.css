@@ -10,6 +10,13 @@
     font-size: 1.75rem;
 }
 
+article {
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    max-width: 35rem;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
 
 #cat {
     font-size: 1.5rem;
