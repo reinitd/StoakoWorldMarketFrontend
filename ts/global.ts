@@ -24,10 +24,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         - https://github.com/reinitd/StoakoWorldMarketFrontend/tree/production
     
     */
-    // const apiKey = getCookieValue("WORLDMARKETAPIKEY");
-    // if (apiKey == null && window.location.pathname != '/login') {
-    //     window.location.replace("https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code")
-    // }
+    const apiKey = getCookieValue("WORLDMARKETAPIKEY");
+    if (apiKey == null && window.location.pathname != '/login') {
+        window.location.replace("https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code")
+    }
     // End CA Check
 
     const search = document.getElementById('search') as HTMLInputElement;
