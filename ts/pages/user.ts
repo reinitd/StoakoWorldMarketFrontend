@@ -26,61 +26,62 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // const user = populateUserResult.value;
 
-    const filter = {
-        location: document.getElementById('js-filter-location') as HTMLInputElement,
-        payementType: document.getElementById('js-filter-payment-type') as HTMLInputElement,
-        category: document.getElementById('js-filter-category') as HTMLInputElement,
-        clear: document.getElementById('js-clear-filter'),
-        apply: document.getElementById('js-apply-filter')
-    };
+    // const filter = {
+    //     location: document.getElementById('js-filter-location') as HTMLInputElement,
+    //     payementType: document.getElementById('js-filter-payment-type') as HTMLInputElement,
+    //     category: document.getElementById('js-filter-category') as HTMLInputElement,
+    //     clear: document.getElementById('js-clear-filter'),
+    //     apply: document.getElementById('js-apply-filter')
+    // };
 
-    const fLocation = getParamFromUrl('flocation', String) as string;
-    const fPaymentType = getParamFromUrl('fpaymenttype', String) as string;
-    const fCategory = getParamFromUrl('fcategory', String) as string;
+    // const fLocation = getParamFromUrl('flocation', String) as string;
+    // const fPaymentType = getParamFromUrl('fpaymenttype', String) as string;
+    // const fCategory = getParamFromUrl('fcategory', String) as string;
 
-    fLocation && (filter.location.value = fLocation);
-    fPaymentType && (filter.payementType.value = fPaymentType);
-    fCategory && (filter.category.value = fCategory);
+    // fLocation && (filter.location.value = fLocation);
+    // fPaymentType && (filter.payementType.value = fPaymentType);
+    // fCategory && (filter.category.value = fCategory);
 
-    const searchFilters = new SearchFilters(fLocation, fPaymentType, fCategory);
+    // const searchFilters = new SearchFilters(fLocation, fPaymentType, fCategory);
 
-    filter.clear.onclick = () => {
-        location.href = `/user?uuid=${uuid}&pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
-    };
-    filter.apply.onclick = () => {
-        const currentFLocation = filter.location.value.trim();
-        const currentFPaymentType = filter.payementType.value.trim();
-        const currentFCategory = filter.category.value.trim();
+    // filter.clear.onclick = () => {
+    //     location.href = `/user?uuid=${uuid}&pageNumber=${pageNumber}&pageAmount=${pageAmount}`;
+    // };
+    // filter.apply.onclick = () => {
+    //     const currentFLocation = filter.location.value.trim();
+    //     const currentFPaymentType = filter.payementType.value.trim();
+    //     const currentFCategory = filter.category.value.trim();
 
-        let filters = [];
+    //     let filters = [];
 
-        if (currentFLocation !== '') {
-            filters.push(
-                ['flocation', encodeURIComponent(currentFLocation)]
-            );
-        }
-        if (currentFPaymentType !== '') {
-            filters.push(
-                ['fpaymenttype', encodeURIComponent(currentFPaymentType)]
-            );
-        }
-        if (currentFCategory !== '') {
-            filters.push(
-                ['fcategory', encodeURIComponent(currentFCategory)]
-            );
-        }
+    //     if (currentFLocation !== '') {
+    //         filters.push(
+    //             ['flocation', encodeURIComponent(currentFLocation)]
+    //         );
+    //     }
+    //     if (currentFPaymentType !== '') {
+    //         filters.push(
+    //             ['fpaymenttype', encodeURIComponent(currentFPaymentType)]
+    //         );
+    //     }
+    //     if (currentFCategory !== '') {
+    //         filters.push(
+    //             ['fcategory', encodeURIComponent(currentFCategory)]
+    //         );
+    //     }
 
-        let fUrl = `/user?uuid=${uuid}&pageNumber=${encodeURIComponent(pageNumber)}&pageAmount=${encodeURIComponent(pageAmount)}`;
-        filters.forEach(f => {
-            fUrl += `&${f[0]}=${encodeURIComponent(f[1])}`;
-        });
+    //     let fUrl = `/user?uuid=${uuid}&pageNumber=${encodeURIComponent(pageNumber)}&pageAmount=${encodeURIComponent(pageAmount)}`;
+    //     filters.forEach(f => {
+    //         fUrl += `&${f[0]}=${encodeURIComponent(f[1])}`;
+    //     });
 
-        location.href = fUrl;
-    };
+    //     location.href = fUrl;
+    // };
 
     document.getElementById('js-page-number').textContent = pageNumber.toString();
 
-    const res = await searchCatalogEntries('', pageNumber, pageAmount, searchFilters);
+    // const res = await searchCatalogEntries('', pageNumber, pageAmount, searchFilters);
+    const res = await fetchCatalogEntriesFromSeller(uuid, pageNumber, pageAmount, true, false);
 
     if (!res.success) {
         const warning = document.createElement('p');
@@ -108,7 +109,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         // }
     });
 
-    const nextPageRes = await searchCatalogEntries('', pageNumber + 1, pageAmount, searchFilters);
+    // const nextPageRes = await searchCatalogEntries('', pageNumber + 1, pageAmount, searchFilters);
+    const nextPageRes = await fetchCatalogEntriesFromSeller(uuid, pageNumber + 1, pageAmount, true, false);
     if (pageNumber <= 1) {
         pageBack.style.cursor = 'not-allowed';
     } else {
