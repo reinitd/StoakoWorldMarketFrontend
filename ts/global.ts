@@ -13,6 +13,7 @@ const emoteMap: Record<string, string> = {
     ':biggrin:': '<img src="/assets/emotes/biggrin.gif" alt="biggrin"/>',
     ':beer:': '<img src="/assets/emotes/beer.gif" alt="beer"/>',
     ':party:': '<img src="/assets/emotes/party.gif" alt="party"/>',
+    ':sad:': '<img src="/assets/emotes/sad.gif" alt="sad"/>',
 };
 
 document.addEventListener("DOMContentLoaded", async () => {
