@@ -14,8 +14,6 @@
 }
 
 #notice {
-    display: inline-flex;
-    align-items: center;
     position: fixed;
     bottom: 0;
     right: 0;
