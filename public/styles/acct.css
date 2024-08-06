@@ -1,0 +1,38 @@
+#settings-wrapper {
+    position: relative;
+    /* height: 100%; */
+    padding: .5rem 1rem;
+}
+#settings h1 {
+    margin: 0;
+}
+
+#settings {
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+#settings input[type=text] {
+    width: 100%;
+}
+
+#js-head-img {
+    height: fit-content;
+    aspect-ratio: 1/1;
+    border-radius: 10px;
+    align-self: top;
+    margin-top: 1.25rem;
+}
+
+#user-info-table th {
+    text-align: right;
+    padding-right: 5px;
+}
+
+#user-info-table td i {
+    padding-left: 2.5px;
+    cursor: pointer;
+}
+#user-info-table td i:hover {
+    opacity: .75;
+}

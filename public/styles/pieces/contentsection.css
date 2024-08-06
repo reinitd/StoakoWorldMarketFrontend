@@ -1,0 +1,33 @@
+.content-section {
+    width: fit-content;
+    align-items: center;
+}
+.content-section p {
+    padding: 0.1rem 0;
+    text-align: center;
+    font-size: 0.925rem;
+}
+.content-section .links {
+    display: inline-flex;
+    gap: 1rem;
+}
+.content-section .links ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.content-section .links li {
+    border-bottom: 1px solid #404040;
+}
+.content-section .links li * {
+    width: 100%;
+    display: inline-block;
+}
+.content-section li:hover {
+    color: #dd65f3;
+    background-color: #232426;
+    text-decoration: underline;
+}
+.content-section li:hover * {
+    color: #dd65f3;
+}

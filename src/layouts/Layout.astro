@@ -1,0 +1,261 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+	links?: { rel: string; href: string }[] | null;
+	dimpath?: string[] | null;
+}
+
+const {
+	title = "WorldMarket by Stoako",
+	description = "WorldMarket by Stoako is a platform for trading. Trading, made easy.",
+	links,
+	dimpath,
+} = Astro.props;
+
+const dimpathText = dimpath ? dimpath.join(" › ") : "";
+---
+
+<!doctype html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+		<meta name="title" content={title} />
+		<meta property="og:title" content={title} />
+		<meta name="description" content={description} />
+
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="/assets/images/stoako.png" />
+		<meta property="og:image:alt" content="Stoako Flag" />
+		<meta property="og:locale" content="en_US" />
+		<meta property="og:type" content="website" />
+
+		<link rel="canonical" href="https://wm.stoako.com" />
+		<link rel="icon" type="image/png" href="/assets/images/stoako.png" />
+
+		<meta name="theme-color" content="#835432" />
+		<link rel="stylesheet" href="/styles/global.css" />
+		<link rel="stylesheet" href="/styles/anims.css" />
+		<link rel="stylesheet" href="/styles/index.css" />
+		<link rel="stylesheet" href="/styles/pieces/sidebar.css" />
+		<link rel="stylesheet" href="/styles/pieces/contentsection.css" />
+		<link rel="stylesheet" href="/styles/pieces/modal.css" />
+		{links && links.map((link) => <link rel={link.rel} href={link.href} />)}
+		<link
+			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body>
+		<noscript>
+			<div
+				style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            text-align: center;
+            width: 100%;
+            background-color: red;
+            height: auto;
+            "
+			>
+				<p>
+					You <strong>need</strong> JavaScript to run this application.
+				</p>
+			</div>
+		</noscript>
+		<div class="notice">
+			<i class="bx bx-x"></i>
+			<strong>Update for 8/1</strong>
+			<p>Updates have been delayed to next week. :sad:</p>
+		</div>
+		<main id="wrapper">
+			<div id="container" class="flex-row">
+				<div id="sidebar" class="content flex-col border-lateral">
+					<div
+						style="display: flex; flex-direction: column; align-items: center;"
+					>
+						<a href="/">
+							<div id="blurb">
+								<p>WM</p>
+							</div>
+						</a>
+						<br />
+						<a href="/post" class="sidebar-button-container">
+							<i class="bx bx-edit"></i>
+							<p>post an item</p>
+						</a>
+						<br />
+						<span id="search-container">
+							<i class="bx bx-fw bx-search-alt-2"></i>
+							<input
+								type="text"
+								id="search"
+								placeholder="search worldmarket"
+							/>
+						</span>
+						<a href="/search?q=" style="margin-top: 1rem;"
+							>view all listings</a
+						>
+					</div>
+					<div class="sidebar-group blue-text">
+						<p onclick="showModal(modalContent.help)">
+							help, faq, abuse, legal
+						</p>
+						<p onclick="showModal(modalContent.scams)">
+							avoid scams and fraud
+						</p>
+						<p onclick="showModal(modalContent.safety)">
+							personal safety tips
+						</p>
+					</div>
+					<div class="sidebar-group blue-text">
+						<p>about WorldMarket</p>
+						<p>WorldMarket is hiring</p>
+						<p>What's new</p>
+					</div>
+					<div class="sidebar-group blue-text">
+						<a href="https://stoako.com" target="_blank"
+							>WorldMarket is brought to you by Stoako.</a
+						>
+					</div>
+				</div>
+				<div id="content" class="flex-col">
+					<header
+						class="content border-vertical flex-center-vertical"
+					>
+						<h1>
+							<strong>WorldMarket</strong>
+							<small>by Stoako</small>
+							{
+								dimpathText && (
+									<span id="dimpath">
+										{" "}
+										&rsaquo; {dimpathText}
+									</span>
+								)
+							}
+						</h1>
+						<div id="actions" class="flex-row">
+							<a href="/post" style="color: #7be459;">
+								<i class="bx bx-edit"></i>
+							</a>
+							<a href="/acct" style="color: rgb(200, 195, 188);">
+								<i class="bx bx-user"></i>
+							</a>
+						</div>
+					</header>
+					<slot />
+				</div>
+				<div id="location" class="content border-lateral">
+					<p>Locations</p>
+				</div>
+			</div>
+		</main>
+
+		<style>
+			#location {
+				min-width: 90px;
+				text-align: center;
+				padding: 1rem 0.5rem;
+			}
+		</style>
+
+		<script>
+			import { getCookieValue } from "../lib/cookies";
+			import { replaceTextInDocument } from "../lib/global";
+
+			document.addEventListener("DOMContentLoaded", async () => {
+				// Begin CA Check
+				/*
+				##### NOTICE #####
+				This will go away once the closed-alpha is over.
+				If you want to view the code, it is located here:
+					- https://github.com/reinitd/StoakoWorldMarketFrontend/tree/production
+				
+				*/
+				// const apiKey = getCookieValue("WORLDMARKETAPIKEY");
+				// if (apiKey == null && window.location.pathname != "/login") {
+				// 	window.location.replace(
+				// 		"https://mc-auth.com/oAuth2/authorize?client_id=3407823596079285374&redirect_uri=https%3A%2F%2Fwm.stoako.com%2Flogin&scope=profile&response_type=code",
+				// 	);
+				// }
+				// End CA Check
+
+				const search = document.getElementById(
+					"search",
+				) as HTMLInputElement;
+				search.addEventListener("keydown", (event: KeyboardEvent) => {
+					if (event.key === "Enter") {
+						let url = `/search?q=${search.value}&pageNumber=1&pageAmount=20`;
+						location.href = url;
+					}
+				});
+
+				replaceTextInDocument(document.body);
+
+				const notices = document.querySelectorAll(".notice > .bx-x");
+				for (let notice of notices) {
+					notice.addEventListener("click", () => {
+						notice.parentElement?.remove();
+					});
+				}
+			});
+		</script>
+
+		<script>
+			const modalContent = {
+				help: {
+					title: "Coming Soon",
+					content:
+						"The &quot;help, faq, abuse, legal&quot; page is coming soon <small>&lpar;probably never&rpar;</small>.",
+				},
+				scams: {
+					title: "Scams",
+					content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    Sometimes you may encounter someone pretending to be a WorldMarket user or other trusted authority<br/>in order to get your money, items, or personal information.<br/>
+    <br/>
+    We have gathered some indicators that may help you stay safe and identify fake offers on WorldMarket:`,
+				},
+				safety: {
+					title: "Safety",
+					content: `The overwhelming majority of WorldMarket users are trustworthy and well-meaning.<br/>
+    <br/>
+    As with all transactions, please practice caution when interacting with others.<br/>
+    <br/>
+    When meeting someone for the first time, please remember to:<br/>
+    <ul>
+        <li>Insist on a public meeting place like a bank or police department.</li>
+        <li>Do not meet in a secluded place or invite strangers into your home.</li>
+        <li>Be especially careful buying/selling high value items.</li>
+        <li>Tell a friend or family member where you're going.</li>
+        <li>Consider having a friend accompany you.</li>
+        <li>Trust your instincts.</li>
+    </ul>
+    Taking these simple precautions helps make WorldMarket safer for everyone.`,
+				},
+			};
+		</script>
+
+		<script is:inline src="https://unpkg.com/@popperjs/core@2"></script>
+		<script is:inline src="https://unpkg.com/tippy.js@6"></script>
+		<script is:inline src="/js/global.js"></script>
+		<script is:inline src="/js/modal.js"></script>
+		<!-- <script src="/js/global.js"></script> -->
+		<!-- <script src="/js/modal.js"></script> -->
+		<!-- <script src="/js/pages/index.js"></script> -->
+		<!-- <script src="/js/cookies.js"></script> -->
+		<!-- <script src="/js/database/catalogEntry.js"></script> -->
+		<!-- <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script> TODO: Add Modernizr js -->
+		<script type="text/javascript" src="/js/dompurify.min.js"></script>
+		<script
+			src="https://code.jquery.com/jquery-3.7.1.min.js"
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+			crossorigin="anonymous"></script>
+		<script src="/assets/js/script.js" type="module"></script>
+	</body>
+</html>

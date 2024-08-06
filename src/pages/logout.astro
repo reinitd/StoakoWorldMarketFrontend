@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout
+    links={[{ rel: "stylesheet", href: "/styles/logout.css" }]}
+    dimpath={["logout"]}
+>
+    <div id="logout-wrapper" class="content border-vertical">
+        <div id="loading">
+            <p id="status">Logging out...</p>
+            <span id="spinner" class="flex-col">
+                <i
+                    class="bx bx-refresh"
+                    style="color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite"
+                ></i>
+            </span>
+        </div>
+    </div>
+</Layout>
+
+<script is:inline src="/js/result.js"></script>
+<script is:inline src="/js/helpers.js"></script>
+<script is:inline src="/js/pages/logout.js"></script>
+<script is:inline src="/js/cookies.js"></script>
+<script is:inline src="/js/database/auth.js"></script>

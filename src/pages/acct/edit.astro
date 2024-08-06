@@ -1,0 +1,91 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout
+    title="WorldMarket by Stoako"
+    description="WorldMarket by Stoako is a platform for trading. Trading, made easy."
+    links={[{ rel: "stylesheet", href: "/styles/acct.css" }]}
+    dimpath={["acct", "edit"]}
+>
+    <div id="settings-wrapper" class="content border-vertical">
+        <div id="loading">
+            <span id="spinner">
+                <i
+                    class="bx bx-refresh"
+                    style="color:#ffffff; font-size: 10rem; animation: spin-cc 3s cubic-bezier(.17,.67,.52,1.52) infinite"
+                ></i>
+            </span>
+        </div>
+        <div class="flex-col" style="gap: .5rem; height: 100%;">
+            <span
+                class="flex-row"
+                style="justify-content: space-around; margin-top: .25rem; padding-bottom: .5rem; border-bottom: 1px solid var(--c-border);"
+            >
+                <a href="/acct">View Account</a>
+                <a href="/acct/vl">View Listings</a>
+                <a href="/logout" style="color: rgb(255, 61, 0);">Log out</a>
+            </span>
+            <div id="settings" class="flex-row">
+                <div>
+                    <h1>Hello, <span class="js-username-here"></span>!</h1>
+                    <table id="user-info-table">
+                        <tbody>
+                            <tr>
+                                <th>UUID</th>
+                                <td class="js-uuid-here"></td>
+                            </tr>
+                            <tr>
+                                <th>Affiliation</th>
+                                <td>
+                                    <input
+                                        type="text"
+                                        name="nationAffiliation"
+                                        id="js-nation-affiliation-input"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Location</th>
+                                <td>
+                                    <input
+                                        type="text"
+                                        name="location"
+                                        id="js-location-input"
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Items Sold</th>
+                                <td class="js-items-sold-here"></td>
+                            </tr>
+                            <tr>
+                                <th>Joined WM</th>
+                                <td class="js-joindate-here"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <img id="js-head-img" alt="MC Head" />
+            </div>
+            <span style="flex-shrink: 1; margin-top: 1rem;">
+                <a
+                    id="js-submit-edits"
+                    style="
+                color: #7be459; cursor: pointer; text-align: center; margin: 0 auto;
+                "
+                    >Submit Changes</a
+                >
+            </span>
+        </div>
+    </div>
+</Layout>
+
+<!-- <script is:inline src="/js/global.js"></script> -->
+<script is:inline src="/js/result.js"></script>
+<script is:inline src="/js/helpers.js"></script>
+<script is:inline src="/js/pages/acct.js"></script>
+<script is:inline src="/js/populate/userInfo.js"></script>
+<script is:inline src="/js/cookies.js"></script>
+<script is:inline src="/js/database/user.js"></script>
+<script is:inline src="/js/database/catalogEntry.js"></script>
